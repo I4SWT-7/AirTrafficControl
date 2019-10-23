@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fly.cs" />
+    <Compile Include="FlyParser.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

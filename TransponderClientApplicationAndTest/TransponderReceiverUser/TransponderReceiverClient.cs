@@ -22,6 +22,7 @@ namespace TransponderReceiverUser
             foreach (var data in e.TransponderData)
             {
                 System.Console.WriteLine($"Transponderdata {data}");    
+                //send data to attached parser here?
             }
         }
     }
