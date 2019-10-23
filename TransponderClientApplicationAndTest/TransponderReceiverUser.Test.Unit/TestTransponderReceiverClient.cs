@@ -18,6 +18,7 @@ namespace TransponderReceiverUser.Test.Unit
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
         }
 
+
         [Test]
         public void TestReception()
         {
