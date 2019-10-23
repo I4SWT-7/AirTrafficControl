@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="FlyParser.cs" />
     <Compile Include="IParser.cs" />
@@ -61,5 +62,6 @@
       <Name>TransponderReceiverUser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
