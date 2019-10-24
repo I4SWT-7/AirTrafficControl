@@ -8,6 +8,6 @@ namespace TransponderReceiverApplication.Transformer
 {
     interface ITransformer
     {
-        TransformData(List<>)
+        void TransformData(List<Fly> data);
     }
 }

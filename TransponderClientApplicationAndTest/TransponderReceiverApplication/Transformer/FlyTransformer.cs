@@ -26,8 +26,8 @@ namespace TransponderReceiverApplication.Transformer
             foreach (var Fly in data)
             {
                 string datetime = Fly.Datetime.Now.ToString();
-                string createDate = Convert.ToDateTime(datetime).ToString("F");
-                DateTime dt = DateTime.ParseExact(createDate, "yyyy-MM-dd hh:mm: tt", CultureInfo.InvariantCulture)
+                string createDate = Convert.ToDateTime(datetime).ToString();
+                DateTime dt = DateTime.ParseExact(createDate, "yyyy-MM-dd hh:mm: tt", CultureInfo.InvariantCulture);
 
             }
             
