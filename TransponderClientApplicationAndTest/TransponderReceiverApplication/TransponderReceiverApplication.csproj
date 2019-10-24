@@ -48,8 +48,8 @@
   <ItemGroup>
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
-    <Compile Include="FlyParser.cs" />
-    <Compile Include="IParser.cs" />
+    <Compile Include="Parser\FlyParser.cs" />
+    <Compile Include="Parser\IParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
