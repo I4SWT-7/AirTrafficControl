@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace TransponderReceiverApplication
 {
-    class Fly
+    public class Fly
     {
-        string Tag;
-        int xcor;
-        int ycor;
-        int zcor;
-        DateTime date;
+        public string Tag;
+        public int xcor;
+        public int ycor;
+        public int zcor;
+        public DateTime date;
 
-        Fly()
+        public Fly()
         {
             date = new DateTime();
             Tag = "Unknown";

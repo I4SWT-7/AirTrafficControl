@@ -25,6 +25,7 @@ namespace TransponderReceiverApplication
 
         public void Parsedata(string data)
         {
+            
             // create new Fly object, insert data from parameter into fly object and save to fly list   
             Console.WriteLine($"FlyParserData {data}");
         }

@@ -23,10 +23,25 @@ namespace TransponderReceiverApplication
             this.receiver.TransponderDataReady += RecieveData;
         }
 
+        public event EventHandler<RawTransponderDataEventArgs> ParserDataReady; // færdiggør
+
         public void Parsedata(string data)
         {
-            // create new Fly object, insert data from parameter into fly object and save to fly list   
-            Console.WriteLine($"FlyParserData {data}");
+            Fly newplane = new Fly();
+            var splitted_data = data.Split(';');
+            newplane.Tag = splitted_data[0];
+            newplane.xcor = Int32.Parse(splitted_data[1]);
+            newplane.ycor = Int32.Parse(splitted_data[2]);
+            newplane.zcor = Int32.Parse(splitted_data[3]);
+           // newplane.date = DateTime.Parse(splitted_data[4]); fix format
+            
+
+            FlyList.Add(newplane);
+
+            foreach (var fly in FlyList)
+            {
+                Console.WriteLine(fly);
+            }
         }
 
 
