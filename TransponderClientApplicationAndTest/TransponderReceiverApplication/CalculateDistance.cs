@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace TransponderReceiverApplication
 {
-    public interface ICollisionHandler
+    class CalculateDistance
     {
-        void WriteLogWarning(Fly fly);
 
-        //void ReceiveData(List<Fly> data);
     }
 }

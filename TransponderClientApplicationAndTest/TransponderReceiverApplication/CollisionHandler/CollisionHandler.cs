@@ -5,19 +5,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
+using TransponderReceiverApplication.Transformer;
 
-namespace TransponderReceiverApplication.CollisionHandler
+namespace TransponderReceiverApplication
 {
-    class CollisionHandler : ICollisionHandler
+    public class CollisionHandler : ICollisionHandler
     {
         private List<Fly> data;
         private CalculatorClass calculator;
         private ITransformer transformer;
 
-        public CollisionHandler(iTransformerReceiver receiver)
+        public CollisionHandler(ITransformer receiver)
         {
             this.transformer = receiver;
-            this.receiver.TransformerDataReady += ReceiveData()
+            this.transformer.TransformerDataReady += ReceiveData;
         }
 
         public void WriteLogWarning(Fly fly)
@@ -37,7 +39,7 @@ namespace TransponderReceiverApplication.CollisionHandler
             }
         }
 
-        public void ReceiveData(object sender, )
+        public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
             
         }
