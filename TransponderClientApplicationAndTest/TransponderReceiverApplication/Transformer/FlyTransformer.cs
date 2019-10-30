@@ -16,19 +16,29 @@ namespace TransponderReceiverApplication.Transformer
         {
             this.receiver = receiver;
 
-            this.receiver.Parsedata(); += ReceiveData;
+            this.receiver.ParserDataReady += ReceiveData;
 
         }
 
 
         public void TransformData(List<Fly> data)
         {
+            foreach (var Fly in data)
+            {
+                string datetime = Fly.Datetime.Now.ToString();
+                string createDate = Convert.ToDateTime(datetime).ToString();
+                DateTime dt = DateTime.ParseExact(createDate, "yyyy-MM-dd hh:mm: tt", CultureInfo.InvariantCulture);
+
+            }
             
         }
 
         private void ReceiveData(object sender, RawTransponderDataEventArgs e)
         {
-
+            foreach (var data in e.ParserData)
+            {
+                TransformData(data);
+            }
         }
 
     }
