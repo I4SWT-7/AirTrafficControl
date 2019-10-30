@@ -17,10 +17,10 @@ namespace TransponderReceiverApplication
 
         private void RecieveEvent(object sender, RawParserDataEventArgs e)
         {
-           Console.WriteLine("Event triggered");
+           //Console.WriteLine("Event triggered");
             foreach (var data in e.Flylist)
             {
-                Console.WriteLine(data.Tag, data.date);
+                Console.WriteLine($"{data.Tag} {data.date}+{data.date.Millisecond}");
             }
         }
     }
