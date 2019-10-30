@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\CalculateCourse.cs" />
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
     <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
@@ -72,8 +73,6 @@
   <ItemGroup>
     <Content Include="CollisionHandler\LogFile.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Calculator\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
