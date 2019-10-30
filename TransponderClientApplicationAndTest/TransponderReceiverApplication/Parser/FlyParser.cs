@@ -10,7 +10,7 @@ namespace TransponderReceiverApplication
 {
     class FlyParser : IParser
     {
-        List<Fly> FlyList = new List<Fly>();
+        List<String> SavedData = new List<string>();
         private ITransponderReceiver receiver;
         public event EventHandler<RawParserDataEventArgs> ParserDataReady;
 
@@ -24,34 +24,37 @@ namespace TransponderReceiverApplication
         }
 
 
-        public void Parsedata(string data)
+        public void Parsedata(List<string> data)
         {
-            Fly newplane = new Fly();
-            var splitted_data = data.Split(';');
-            newplane.Tag = splitted_data[0];
-            newplane.xcor = Int32.Parse(splitted_data[1]);
-            newplane.ycor = Int32.Parse(splitted_data[2]);
-            newplane.zcor = Int32.Parse(splitted_data[3]);
-            newplane.date = DateTime.ParseExact(splitted_data[4], "yyyyMMddHHmmssfff", null);
+            List<Fly> FlyList = new List<Fly>();
+            foreach (var list in data)
+            {
+                Fly newplane = new Fly();
+                var splitted_data = list.Split(';');
+                newplane.Tag = splitted_data[0];
+                newplane.xcor = Int32.Parse(splitted_data[1]);
+                newplane.ycor = Int32.Parse(splitted_data[2]);
+                newplane.zcor = Int32.Parse(splitted_data[3]);
+                newplane.date = DateTime.ParseExact(splitted_data[4], "yyyyMMddHHmmssfff", null);
 
-            FlyList.Add(newplane);
-
-            // DEBUG
+                FlyList.Add(newplane);
+            }
             //foreach (var fly in FlyList)
             //{
-            //    Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
+            //    Console.WriteLine($"{fly.Tag} {fly.date}+ {fly.date.Millisecond}");
             //}
-
-            ParserDataReady.Invoke(this, new RawParserDataEventArgs(FlyList));
+            ParserDataReady?.Invoke(this, new RawParserDataEventArgs(FlyList));
         }
 
         private void RecieveData(object sender, RawTransponderDataEventArgs e)
         {
+
+            List<string> stringlist = new List<string>();
             foreach (var data in e.TransponderData)
             {
-                Parsedata(data);
+                stringlist.Add(data);
             }
-            
+            Parsedata(stringlist);
         }
     }
 }
