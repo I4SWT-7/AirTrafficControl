@@ -49,6 +49,9 @@
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
     <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
+    <Compile Include="Filter\Filter.cs" />
+    <Compile Include="Filter\IFilter.cs" />
+    <Compile Include="Filter\RawFilterDataEventArgs.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />
     <Compile Include="Parser\IParser.cs" />
@@ -72,5 +75,6 @@
   <ItemGroup>
     <Content Include="CollisionHandler\LogFile.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
