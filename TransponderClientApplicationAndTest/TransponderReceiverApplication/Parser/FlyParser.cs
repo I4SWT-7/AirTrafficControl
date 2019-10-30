@@ -11,7 +11,6 @@ namespace TransponderReceiverApplication
     class FlyParser : IParser
     {
         List<Fly> FlyList = new List<Fly>();
-        List<String> SavedData = new List<string>();
         private ITransponderReceiver receiver;
         public event EventHandler<RawParserDataEventArgs> ParserDataReady;
 
