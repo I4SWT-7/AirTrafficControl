@@ -11,10 +11,9 @@ using TransponderReceiver;
 
 namespace TransponderReceiverApplication
 {
-    interface IParser
+    public interface IParser
     {
         void Parsedata(string data);
         event EventHandler<RawParserDataEventArgs> ParserDataReady;
     }
-
 }

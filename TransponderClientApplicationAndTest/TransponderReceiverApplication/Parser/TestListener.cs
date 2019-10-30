@@ -9,7 +9,7 @@ namespace TransponderReceiverApplication
     class TestListener
     {
         private IParser rec;
-        TestListener(IParser reciever)
+        public TestListener(IParser reciever)
         {
             this.rec = reciever;
             this.rec.ParserDataReady += RecieveEvent;
@@ -17,9 +17,10 @@ namespace TransponderReceiverApplication
 
         private void RecieveEvent(object sender, RawParserDataEventArgs e)
         {
-            foreach (var data in e.flylist)
+           Console.WriteLine("Event triggered");
+            foreach (var data in e.Flylist)
             {
-                Console.WriteLine("Event triggered");
+                Console.WriteLine(data.Tag);
             }
         }
     }

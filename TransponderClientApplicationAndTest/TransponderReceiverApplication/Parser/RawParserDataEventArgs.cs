@@ -13,10 +13,13 @@ namespace TransponderReceiverApplication
 {
     public class RawParserDataEventArgs : EventArgs
     {
-        public RawParserDataEventArgs(List<Fly> flylist) {
-            Console.WriteLine(flylist);
+        public List<Fly> Flylist { get; set; }
+
+        public RawParserDataEventArgs(List<Fly> flylist) 
+        {
+            Flylist = flylist;
         }
-       public List<Fly> flylist;
-         
     }
 }
+
+

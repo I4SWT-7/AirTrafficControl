@@ -50,6 +50,7 @@ namespace TransponderReceiverApplication
             {
                 Parsedata(data);
             }
+            
         }
     }
 }
