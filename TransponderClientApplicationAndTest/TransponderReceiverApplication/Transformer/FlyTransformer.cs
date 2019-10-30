@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
+using TransponderReceiverApplication.Transformer;
 
-namespace TransponderReceiverApplication.Transformer
+namespace TransponderReceiverApplication
 {
     class FlyTransformer : ITransformer
     {
@@ -38,7 +39,7 @@ namespace TransponderReceiverApplication.Transformer
             //{
             //    FlyListing.Add(TransformData(fly));
             //}
-
+            Console.WriteLine("Event trigger");
             for (int i = 0; i < e.Flylist.Count; i++)
             {
                 e.Flylist[i] = TransformData(e.Flylist[i]);
@@ -48,3 +49,4 @@ namespace TransponderReceiverApplication.Transformer
 
     }
 }
+

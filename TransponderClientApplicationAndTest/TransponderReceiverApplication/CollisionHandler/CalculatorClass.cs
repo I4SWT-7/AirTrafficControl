@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
-namespace TransponderReceiverApplication.CollisionHandler
+namespace TransponderReceiverApplication
 {
     public class CalculatorClass
     {

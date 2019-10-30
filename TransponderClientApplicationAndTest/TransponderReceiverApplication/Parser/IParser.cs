@@ -13,7 +13,7 @@ namespace TransponderReceiverApplication
 {
     public interface IParser
     {
-        void Parsedata(string data);
+        void Parsedata(List<string> data);
         event EventHandler<RawParserDataEventArgs> ParserDataReady;
     }
 }
