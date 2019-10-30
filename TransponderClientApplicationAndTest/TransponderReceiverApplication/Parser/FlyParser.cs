@@ -11,7 +11,6 @@ namespace TransponderReceiverApplication
     class FlyParser : IParser
     {
         List<Fly> FlyList = new List<Fly>();
-        List<String> SavedData = new List<string>();
         private ITransponderReceiver receiver;
         public event EventHandler<RawParserDataEventArgs> ParserDataReady;
 
@@ -37,10 +36,12 @@ namespace TransponderReceiverApplication
 
             FlyList.Add(newplane);
 
-            foreach (var fly in FlyList)
-            {
-                Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
-            }
+            // DEBUG
+            //foreach (var fly in FlyList)
+            //{
+            //    Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
+            //}
+
             ParserDataReady.Invoke(this, new RawParserDataEventArgs(FlyList));
         }
 

@@ -20,7 +20,7 @@ namespace TransponderReceiverApplication
            Console.WriteLine("Event triggered");
             foreach (var data in e.Flylist)
             {
-                Console.WriteLine(data.Tag);
+                Console.WriteLine(data.Tag, data.date);
             }
         }
     }
