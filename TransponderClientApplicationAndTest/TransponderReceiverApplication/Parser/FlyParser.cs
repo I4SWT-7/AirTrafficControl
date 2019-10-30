@@ -37,10 +37,12 @@ namespace TransponderReceiverApplication
 
             FlyList.Add(newplane);
 
-            foreach (var fly in FlyList)
-            {
-                Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
-            }
+            // DEBUG
+            //foreach (var fly in FlyList)
+            //{
+            //    Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
+            //}
+
             ParserDataReady.Invoke(this, new RawParserDataEventArgs(FlyList));
         }
 
