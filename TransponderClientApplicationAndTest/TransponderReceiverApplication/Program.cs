@@ -13,10 +13,12 @@ namespace TransponderReceiverApplication
         static void Main(string[] args)
         {
             // Using the real transponder data receiver
-            var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-
+            var receiver = TransponderReceiverFactory.();
+            // var parserreceiver = ???
             // Dependency injection with the real TDR
             FlyParser myparser = new FlyParser(receiver);
+            //TestListener listener = new TestListener();CreateTransponderDataReceiver
+
 
             // Let the real TDR execute in the background
             while (true)

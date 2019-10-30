@@ -50,6 +50,9 @@
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />
     <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Parser\ParserRecieverFactory.cs" />
+    <Compile Include="Parser\RawParserDataEventArgs.cs" />
+    <Compile Include="Parser\TestListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
