@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace TransponderReceiverApplication.Transformer
 {
     class FlyTransformer : ITransformer
     {
-        List<Fly> data = new List<Fly>();
+        List<Fly> FlyListing = new List<Fly>();
         private IParser receiver;
 
         public FlyTransformer(IParser receiver)
@@ -23,21 +24,22 @@ namespace TransponderReceiverApplication.Transformer
 
         public void TransformData(List<Fly> data)
         {
-            foreach (var Fly in data)
-            {
-                string datetime = Fly.Datetime.Now.ToString();
-                string createDate = Convert.ToDateTime(datetime).ToString();
-                DateTime dt = DateTime.ParseExact(createDate, "yyyy-MM-dd hh:mm: tt", CultureInfo.InvariantCulture);
-
-            }
             
+            foreach (var fly in FlyListing)
+            {
+                DateTime dt = fly.date;
+                string stringDate = dt.ToString("MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'");
+
+                DateTime newDt = DateTime.ParseExact(stringDate, "MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'", null);
+            }
+
         }
 
         private void ReceiveData(object sender, RawTransponderDataEventArgs e)
         {
             foreach (var data in e.ParserData)
             {
-                TransformData(data);
+                TransformData(FlyListing);
             }
         }
 
