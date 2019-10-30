@@ -13,6 +13,7 @@ namespace TransponderReceiverApplication
         List<Fly> FlyList = new List<Fly>();
         List<String> SavedData = new List<string>();
         private ITransponderReceiver receiver;
+        public event EventHandler<RawParserDataEventArgs> ParserDataReady;
 
         public FlyParser(ITransponderReceiver receiver)
         {
@@ -23,7 +24,6 @@ namespace TransponderReceiverApplication
             this.receiver.TransponderDataReady += RecieveData;
         }
 
-        public event EventHandler<RawTransponderDataEventArgs> ParserDataReady; // færdiggør
 
         public void Parsedata(string data)
         {
@@ -33,17 +33,16 @@ namespace TransponderReceiverApplication
             newplane.xcor = Int32.Parse(splitted_data[1]);
             newplane.ycor = Int32.Parse(splitted_data[2]);
             newplane.zcor = Int32.Parse(splitted_data[3]);
-           // newplane.date = DateTime.Parse(splitted_data[4]); fix format
-            
+            newplane.date = DateTime.ParseExact(splitted_data[4], "yyyyMMddHHmmssfff", null);
 
             FlyList.Add(newplane);
 
             foreach (var fly in FlyList)
             {
-                Console.WriteLine(fly);
+                Console.WriteLine($"{fly.Tag} {fly.xcor} {fly.ycor} {fly.zcor} {fly.date}");
             }
+            ParserDataReady.Invoke(this, new RawParserDataEventArgs(FlyList));
         }
-
 
         private void RecieveData(object sender, RawTransponderDataEventArgs e)
         {
@@ -51,6 +50,7 @@ namespace TransponderReceiverApplication
             {
                 Parsedata(data);
             }
+            
         }
     }
 }
