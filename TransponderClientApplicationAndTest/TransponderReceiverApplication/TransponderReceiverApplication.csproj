@@ -54,6 +54,9 @@
     <Compile Include="Parser\TestListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformer\FlyTransformer.cs" />
+    <Compile Include="Transformer\ITransformer.cs" />
+    <Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

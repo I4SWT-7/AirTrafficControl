@@ -10,8 +10,9 @@ namespace TransponderReceiverApplication.Transformer
 {
     class FlyTransformer : ITransformer
     {
-        List<Fly> FlyListing = new List<Fly>();
+        //List<Fly> FlyListing = new List<Fly>();
         private IParser receiver;
+        public event EventHandler<RawTransformerDataEventArgs> TransformerDataReady;
 
         public FlyTransformer(IParser receiver)
         {
@@ -22,25 +23,27 @@ namespace TransponderReceiverApplication.Transformer
         }
 
 
-        public void TransformData(List<Fly> data)
+        public Fly TransformData(Fly transfly)
         {
-            
-            foreach (var fly in FlyListing)
-            {
-                DateTime dt = fly.date;
-                string stringDate = dt.ToString("MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'");
-
-                DateTime newDt = DateTime.ParseExact(stringDate, "MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'", null);
-            }
-
+            DateTime dt = transfly.date;
+            string stringDate = dt.ToString("MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'");
+            DateTime newDt = DateTime.ParseExact(stringDate, "MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'", null);
+            transfly.date = newDt;
+            return transfly;
         }
 
-        private void ReceiveData(object sender, RawTransponderDataEventArgs e)
+        private void ReceiveData(object sender, RawParserDataEventArgs e)
         {
-            foreach (var data in e.ParserData)
+            //foreach (var fly in e.Flylist)
+            //{
+            //    FlyListing.Add(TransformData(fly));
+            //}
+
+            for (int i = 0; i < e.Flylist.Count; i++)
             {
-                TransformData(FlyListing);
+                e.Flylist[i] = TransformData(e.Flylist[i]);
             }
+            TransformerDataReady.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 
     }

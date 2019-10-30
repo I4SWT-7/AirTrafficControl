@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiverApplication.Transformer;
+using TransponderReceiver;
 
-namespace TransponderReceiverApplication.Transformer
+namespace TransponderReceiverApplication
 {
-    interface ITransformer
+    public interface ITransformer
     {
-        void TransformData(List<Fly> data);
+        Fly TransformData(Fly transfly);
+        event EventHandler<RawTransformerDataEventArgs> TransformerDataReady;
     }
 }
