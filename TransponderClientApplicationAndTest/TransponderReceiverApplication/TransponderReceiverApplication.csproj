@@ -46,20 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculateDistance.cs" />
-    <Compile Include="CollisionHandler\CalculatorClass.cs" />
-    <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />
     <Compile Include="Parser\IParser.cs" />
     <Compile Include="Parser\RawParserDataEventArgs.cs" />
-    <Compile Include="Parser\TestListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transformer\FlyTransformer.cs" />
-    <Compile Include="Transformer\ITransformer.cs" />
-    <Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,11 +63,6 @@
       <Name>TransponderReceiverUser</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="CollisionHandler\LogFile.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Calculator\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
