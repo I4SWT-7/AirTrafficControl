@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +9,25 @@ using TransponderReceiverApplication;
 using NSubstitute;
 
 
+
 namespace TestFlyTransformer
 {
     [TestFixture]
     public class TestFlyTransformer
     {
 
-        //private FlyTransformer _uut;
+        private FlyTransformer _uut;
+        private IParser _fakeIParser;
+        private List<Fly> _fakeFlyList;
 
-        private ITransformer _fakeITransformer;
-        
 
         [SetUp]
         public void SetUp()
         {
-            // Make a Fake ITransformer
-            _fakeITransformer = Substitute.For<ITransformer>();
-            // Inject the fake TDR
-            //_uut = new FlyTransformer;
+            // Make a Fake IParser
+            _fakeIParser = Substitute.For<IParser>();
+            // Inject the fake IParser
+            _uut = new FlyTransformer(_fakeIParser);
         }
 
         [Test]
@@ -33,28 +35,31 @@ namespace TestFlyTransformer
         {
             //Make a test Fly object
             Fly testfly1 = new Fly();
-            //testfly1.date = DateTime.Now;
 
-            Fly testfly2 = new Fly();
-            testfly2.date = testfly1.date;
+            //Make teststring to assert to
+            string teststring = testfly1.date.ToString("dd. MMM yyyy HH:mm:ss:fff ");
+            
+            //Assertion to check if TransformData transforms correctly
+            Assert.AreEqual(teststring, _uut.TransformData(testfly1).date.ToString());
+        }
 
+        
+        public void FlyTransformer_TransformData_called_when_ReceieveData()
+        {
+        }
 
-            _fakeITransformer.TransformData(testfly1);
-            Assert.AreEqual(testfly2.date.ToString("dd. MMM yyyy HH:mm:ss:fff"), _fakeITransformer.TransformData(testfly1).ToString());
+        
+        
+        public void FlyTransformer_receives_data(List<Fly> newFlyList)
+        {
 
+            _fakeIParser.ParserDataReady +=
+                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_fakeFlyList) {Flylist = newFlyList});
 
-            //Assert.AreEqual("31. okt 2019 15:50:23:555", testfly1.date.ToString());
+            Assert.That(_uut.TransFlyList, Is.EqualTo(newFlyList));
 
         }
         /*
-        [Test]
-        public void FlyTransformer_correct_format_conversion()
-        { }
-
-        [Test]
-        public void FlyTransformer_receives_data()
-        { }
-
         [Test]
         public void FlyTransformer_sends_data()
         {
