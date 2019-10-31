@@ -33,6 +33,7 @@ namespace TransponderReceiverUser.Test.Unit
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
             // Assert something here or use an NSubstitute Received
+
         }
     }
 }

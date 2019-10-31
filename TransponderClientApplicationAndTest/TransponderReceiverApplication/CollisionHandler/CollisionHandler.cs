@@ -22,12 +22,14 @@ namespace TransponderReceiverApplication
         }
         public void DataRecived()
         {
-            Console.WriteLine("Event triggered in Collisionhandler");
         }
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            DataRecived();
+            foreach(var data in e.FlyList)
+            {
+                Console.WriteLine($"CollisionFormat: {data.date}");
+            }
         }
     }
 }

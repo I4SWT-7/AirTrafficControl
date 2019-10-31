@@ -35,6 +35,7 @@ namespace TransponderReceiverApplication
                 newplane.ycor = Int32.Parse(splitted_data[2]);
                 newplane.zcor = Int32.Parse(splitted_data[3]);
                 newplane.date = DateTime.ParseExact(splitted_data[4], "yyyyMMddHHmmssfff", null);
+                Console.WriteLine($"Parser: {newplane.date.ToString("D")}");
 
                 FlyList.Add(newplane);
             }

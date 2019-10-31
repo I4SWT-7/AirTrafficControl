@@ -5,9 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
-using TransponderReceiverApplication.Transformer;
-using System;
-using System.Globalization;
 using System.Threading;
 
 namespace TransponderReceiverApplication
@@ -38,7 +35,6 @@ namespace TransponderReceiverApplication
             Thread.CurrentThread.CurrentCulture = culture;
             DateTime newDt = DateTime.ParseExact(stringDate, "yyyyMMddHHmmssfff", culture);
             transfly.date = newDt;
-            Console.WriteLine($"Transformer:{transfly.date}");
 
             return transfly;    
         }
