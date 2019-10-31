@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 using TransponderReceiverApplication.Transformer;
+using System;
+using System.Globalization;
+using System.Threading;
 
 namespace TransponderReceiverApplication
 {
@@ -27,10 +30,17 @@ namespace TransponderReceiverApplication
         public Fly TransformData(Fly transfly)
         {
             DateTime dt = transfly.date;
-            string stringDate = dt.ToString("MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'");
-            DateTime newDt = DateTime.ParseExact(stringDate, "MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'", null);
+            string stringDate = dt.ToString(format:"yyyyMMddHHmmssfff");
+
+            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.DateTimeFormat.ShortDatePattern = "dd. MMM yyyy HH:mm:ss:fff";
+            culture.DateTimeFormat.LongTimePattern = "";
+            Thread.CurrentThread.CurrentCulture = culture;
+            DateTime newDt = DateTime.ParseExact(stringDate, "yyyyMMddHHmmssfff", culture);
             transfly.date = newDt;
-            return transfly;
+            Console.WriteLine($"Transformer:{transfly.date}");
+
+            return transfly;    
         }
 
         private void ReceiveData(object sender, RawParserDataEventArgs e)
