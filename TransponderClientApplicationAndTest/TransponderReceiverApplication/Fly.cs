@@ -16,7 +16,7 @@ namespace TransponderReceiverApplication
 
         public Fly(string tag = "Unkown", int x = 0, int y = 0, int z = 0)
         {
-            date = new DateTime();
+            //date = new DateTime();
             Tag = tag;
             xcor = x;
             ycor = y;
