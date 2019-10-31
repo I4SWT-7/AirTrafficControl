@@ -22,10 +22,10 @@ namespace TransponderReceiverApplication.Filter
 
         private void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            FilterDataReady.Invoke(this, new RawFilterDataEventArgs(Filterdata(e.FlyList)));
+            FilterDataReady.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
         }
 
-        public List<Fly> Filterdata(List<Fly> data)
+        public List<Fly> FilterData(List<Fly> data)
         {
             int count = data.Count;
             for (int i = 0; i < count; i++)

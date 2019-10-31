@@ -9,7 +9,7 @@ namespace TransponderReceiverApplication.Filter
 {
     public interface IFilter
     {
-        List<Fly> Filterdata(List<Fly> data);
+        List<Fly> FilterData(List<Fly> data);
         event EventHandler<RawFilterDataEventArgs> FilterDataReady;
     }
 }
