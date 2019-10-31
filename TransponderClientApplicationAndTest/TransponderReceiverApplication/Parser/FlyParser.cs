@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace TransponderReceiverApplication
 {
-    class FlyParser : IParser
+   public class FlyParser : IParser
     {
         private ITransponderReceiver receiver;
         public event EventHandler<RawParserDataEventArgs> ParserDataReady;
@@ -23,7 +23,7 @@ namespace TransponderReceiverApplication
         }
 
 
-        public void Parsedata(List<string> data)
+        public List<Fly> Parsedata(List<string> data)
         {
             List<Fly> FlyList = new List<Fly>();
             foreach (var list in data)
@@ -42,7 +42,9 @@ namespace TransponderReceiverApplication
             //{
             //    Console.WriteLine($"{fly.Tag} {fly.date}+ {fly.date.Millisecond}");
             //}
-            ParserDataReady?.Invoke(this, new RawParserDataEventArgs(FlyList));
+           // Console.WriteLine("Paraser");
+
+            return FlyList;
         }
 
         private void RecieveData(object sender, RawTransponderDataEventArgs e)
@@ -53,7 +55,7 @@ namespace TransponderReceiverApplication
             {
                 stringlist.Add(data);
             }
-            Parsedata(stringlist);
+            ParserDataReady?.Invoke(this, new RawParserDataEventArgs(Parsedata(stringlist)));
         }
     }
 }

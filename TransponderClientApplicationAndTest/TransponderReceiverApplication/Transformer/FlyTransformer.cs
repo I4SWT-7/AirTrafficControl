@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
-using TransponderReceiverApplication.Transformer;
+using System.Threading;
 
 namespace TransponderReceiverApplication
 {
-    class FlyTransformer : ITransformer
+    public class FlyTransformer : ITransformer
     {
         //List<Fly> FlyListing = new List<Fly>();
         private IParser receiver;
@@ -20,30 +20,32 @@ namespace TransponderReceiverApplication
             this.receiver = receiver;
 
             this.receiver.ParserDataReady += ReceiveData;
-
         }
 
 
         public Fly TransformData(Fly transfly)
         {
             DateTime dt = transfly.date;
-            string stringDate = dt.ToString("MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'");
-            DateTime newDt = DateTime.ParseExact(stringDate, "MMM dd yyyy HH:mm:ss 'and' fff 'milliseconds'", null);
+            string stringDate = dt.ToString(format:"yyyyMMddHHmmssfff");
+
+            CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.DateTimeFormat.ShortDatePattern = "dd. MMM yyyy HH:mm:ss:fff";
+            culture.DateTimeFormat.LongTimePattern = "";
+            Thread.CurrentThread.CurrentCulture = culture;
+            DateTime newDt = DateTime.ParseExact(stringDate, "yyyyMMddHHmmssfff", culture);
             transfly.date = newDt;
-            return transfly;
+
+            return transfly;    
         }
 
-        private void ReceiveData(object sender, RawParserDataEventArgs e)
+        public void ReceiveData(object sender, RawParserDataEventArgs e)
         {
-            //foreach (var fly in e.Flylist)
-            //{
-            //    FlyListing.Add(TransformData(fly));
-            //}
-            Console.WriteLine("Event trigger");
+            //Console.WriteLine("Transformer");
             for (int i = 0; i < e.Flylist.Count; i++)
             {
                 e.Flylist[i] = TransformData(e.Flylist[i]);
             }
+
             TransformerDataReady.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 

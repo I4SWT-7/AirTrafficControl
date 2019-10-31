@@ -6,28 +6,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
-using TransponderReceiverApplication.Transformer;
+using TransponderReceiverApplication;
 
 namespace TransponderReceiverApplication
 {
     public class CollisionHandler : ICollisionHandler
     {
-        private List<Fly> data;
-        private ITransformer transformer;
+        private List<Fly> PreviousData;
+        private IFilter Receiver;
+        private CalculateCourse coursecalculator = new CalculateCourse();
+        private CalculateSpeed speedcalculator = new CalculateSpeed();
+        private CalculateDistance distancecalculator = new CalculateDistance();
+        private CheckForSepCond SeperationCalculator = new CheckForSepCond();
 
-        public CollisionHandler(ITransformer receiver)
+        public CollisionHandler(IFilter receiver)
         {
-            this.transformer = receiver;
-            this.transformer.TransformerDataReady += ReceiveData;
+            this.Receiver = receiver;
+            this.Receiver.FilterDataReady += ReceiveData;
         }
-        public void DataRecived()
+        public void DataRecived(List<Fly> flylist)
         {
-            Console.WriteLine("Event triggered in Collisionhandler");
+
+            if (PreviousData == null)
+            {
+                PreviousData = flylist;
+            }
+            else
+            {
+                foreach(var prevfly in PreviousData)
+                {
+                    foreach(var newplane in flylist)
+                    {
+                        if(prevfly.Tag == newplane.Tag)
+                        {
+                            coursecalculator.CalcCourse(prevfly, newplane);
+                            speedcalculator.CalcSpeed(prevfly, newplane);
+                        }
+                        distancecalculator.CalcDistance(prevfly, newplane);
+                        SeperationCalculator.SepCond(prevfly, newplane);
+
+                    }
+                }
+
+                PreviousData = null;
+                PreviousData = flylist;
+            }
         }
 
-        public void ReceiveData(object sender, RawTransformerDataEventArgs e)
+        public void ReceiveData(object sender, RawFilterDataEventArgs e)
         {
-            DataRecived();
+            //Console.WriteLine("CollisionHandler");
+            foreach (var data in e.FlyList)
+            {
+                //Console.WriteLine($"{data.Tag} {data.xcor} {data.ycor} {data.zcor} {data.date}");
+            }
+            DataRecived(e.FlyList);
         }
     }
 }

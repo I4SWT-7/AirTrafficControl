@@ -3,27 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiverApplication;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     class Filter : IFilter
     {
-        event EventHandler<RawFilterDataEventArgs> IFilter.FilterDataReady
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
+        private FlyTransformer receiver;
+        public event EventHandler<RawFilterDataEventArgs> FilterDataReady;
 
-            remove
-            {
-                throw new NotImplementedException();
-            }
+        public Filter(FlyTransformer receiver)
+        {
+            this.receiver = receiver;
+
+            this.receiver.TransformerDataReady += ReceiveData;
+
         }
 
-        void IFilter.Filterdata(List<Fly> data)
+        private void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            throw new NotImplementedException();
+            //Console.WriteLine("Filter");
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
+        }
+
+        public List<Fly> FilterData(List<Fly> data)
+        {
+            int count = data.Count;
+            for (int i = 0; i < count; i++)
+            {
+                string nameTag = data[i].Tag;
+                int tagCount = 0;
+                int x = data[i].xcor;
+                int y = data[i].ycor;
+                int z = data[i].zcor;
+                for (int k = 0; k < data.Count; k++)
+                {
+                    if (data[k].Tag == nameTag)
+                    {
+                        tagCount++;
+                    }
+                }
+                if (tagCount > 1 || 10000 > x || x > 90000 || 10000 > y || y > 90000 || 500 > z || z > 20000)
+                {
+                    data.RemoveAt(i);
+                    count--;
+                    i--;
+                }
+            }
+            return data;
         }
     }
 }

@@ -6,17 +6,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
+
 namespace TransponderReceiverApplication
 {
     class Program
     {
         static void Main(string[] args)
         {
+            CheckForSepCond sepcond = new CheckForSepCond();
+            WriteLog testlog = new WriteLog();
             // Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             FlyParser myparser = new FlyParser(receiver);
             FlyTransformer transform = new FlyTransformer(myparser);
-            CollisionHandler colhandler = new CollisionHandler(transform);
+            Filter filter = new Filter(transform);
+            CollisionHandler colhandler = new CollisionHandler(filter);
 
             // Let the real TDR execute in the background
             while (true)

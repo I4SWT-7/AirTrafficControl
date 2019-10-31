@@ -14,13 +14,12 @@ namespace TransponderReceiverApplication
         public int zcor;
         public DateTime date;
 
-        public Fly()
+        public Fly(string tag = "Unkown", int x = 0, int y = 0, int z = 0)
         {
-            date = new DateTime();
-            Tag = "Unknown";
-            xcor = 0;
-            ycor = 0;
-            zcor = 0;
+            Tag = tag;
+            xcor = x;
+            ycor = y;
+            zcor = z;
             date = DateTime.Now;
         }
     }

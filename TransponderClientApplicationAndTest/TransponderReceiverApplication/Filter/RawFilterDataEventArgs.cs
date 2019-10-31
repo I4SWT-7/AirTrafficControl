@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     public class RawFilterDataEventArgs : EventArgs
     {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     public interface IFilter
     {
-        void Filterdata(List<Fly> data);
+        List<Fly> FilterData(List<Fly> data);
         event EventHandler<RawFilterDataEventArgs> FilterDataReady;
     }
 }
