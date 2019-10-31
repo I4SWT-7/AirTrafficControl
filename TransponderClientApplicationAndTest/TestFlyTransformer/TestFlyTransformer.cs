@@ -18,9 +18,8 @@ namespace TestFlyTransformer
 
         private FlyTransformer _uut;
         private IParser _fakeIParser;
+        private List<Fly> _fakeFlyList;
 
-        
-        
 
         [SetUp]
         public void SetUp()
@@ -44,22 +43,23 @@ namespace TestFlyTransformer
             Assert.AreEqual(teststring, _uut.TransformData(testfly1).date.ToString());
         }
 
-        [Test]
+        
         public void FlyTransformer_TransformData_called_when_ReceieveData()
         {
-            
-            // Act
-            _uut.ReceiveData();
-
-            // Assert on the mock - was the heater called correctly
-            Assert.That(_uut.TransformData, Is.EqualTo(1));
         }
 
-        /*
-        [Test]
-        public void FlyTransformer_receives_data()
-        { }
+        
+        
+        public void FlyTransformer_receives_data(List<Fly> newFlyList)
+        {
 
+            _fakeIParser.ParserDataReady +=
+                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_fakeFlyList) {Flylist = newFlyList});
+
+            Assert.That(_uut.TransFlyList, Is.EqualTo(newFlyList));
+
+        }
+        /*
         [Test]
         public void FlyTransformer_sends_data()
         {
