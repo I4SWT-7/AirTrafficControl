@@ -17,7 +17,7 @@ namespace TransponderReceiverApplication
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             FlyParser myparser = new FlyParser(receiver);
             FlyTransformer transform = new FlyTransformer(myparser);
-            CollisionHandler colhandler = new CollisionHandler(transform);
+            //CollisionHandler colhandler = new CollisionHandler(transform);
 
             // Let the real TDR execute in the background
             while (true)
