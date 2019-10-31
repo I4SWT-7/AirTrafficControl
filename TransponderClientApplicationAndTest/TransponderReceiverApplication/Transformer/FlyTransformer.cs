@@ -45,11 +45,6 @@ namespace TransponderReceiverApplication
 
         private void ReceiveData(object sender, RawParserDataEventArgs e)
         {
-            //foreach (var fly in e.Flylist)
-            //{
-            //    FlyListing.Add(TransformData(fly));
-            //}
-            Console.WriteLine("Event trigger");
             for (int i = 0; i < e.Flylist.Count; i++)
             {
                 e.Flylist[i] = TransformData(e.Flylist[i]);
