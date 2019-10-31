@@ -15,22 +15,19 @@ namespace TransponderReceiverApplication
                 System.Reflection.Assembly.GetExecutingAssembly().Location);
             //Lines er hvor vi skal gemme det data der skal logges
             Console.WriteLine("Logcalled");
-           foreach(var tag in taglist)
-            {
                 // If the two tags does not exists in the taglist = We may print a warning and save the tags in the taglist
-                if (!(taglist.Contains(prevfly.Tag) && taglist.Contains(newfly.Tag)))
+            if (!(taglist.Contains(prevfly.Tag) && taglist.Contains(newfly.Tag)))
+            {
+                string[] lines = { $"WARNING, RISK OF COLLISION BETWEEN: {prevfly.Tag} AND {newfly.Tag} RESGIERED AT : {prevfly.date.ToString()} {newfly.date.ToString()} " +
+                        $"DEBUG: Prefly x,y,z{prevfly.xcor} {prevfly.ycor} {prevfly.zcor} Newfly x,y,z {newfly.xcor} {newfly.ycor} {newfly.zcor}" };
+                using (System.IO.StreamWriter file =
+                    new System.IO.StreamWriter(@"AirTrafficLogfile.txt"))
                 {
-                    string[] lines = { $"WARNING, RISK OF COLLISION BETWEEN: {prevfly.Tag} AND {newfly.Tag} RESGIERED AT : {prevfly.date.ToString()} {newfly.date.ToString()} " +
-                            $"DEBUG: Prefly x,y,z{prevfly.xcor} {prevfly.ycor} {prevfly.zcor} Newfly x,y,z {newfly.xcor} {newfly.ycor} {newfly.zcor}" };
-                    using (System.IO.StreamWriter file =
-                        new System.IO.StreamWriter(dir + @"AirTrafficLogfile.txt"))
+                    foreach (string line in lines)
                     {
-                        foreach (string line in lines)
-                        {
-                            file.WriteLine(line);
-                            taglist.Add(prevfly.Tag);
-                            taglist.Add(newfly.Tag);
-                        }
+                        file.WriteLine(line);
+                        taglist.Add(prevfly.Tag);
+                        taglist.Add(newfly.Tag);
                     }
                 }
             }
