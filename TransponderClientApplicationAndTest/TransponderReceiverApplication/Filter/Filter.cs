@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiverApplication;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     class Filter : IFilter
     {
@@ -22,7 +22,8 @@ namespace TransponderReceiverApplication.Filter
 
         private void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            FilterDataReady.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
+            //Console.WriteLine("Filter");
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
         }
 
         public List<Fly> FilterData(List<Fly> data)
