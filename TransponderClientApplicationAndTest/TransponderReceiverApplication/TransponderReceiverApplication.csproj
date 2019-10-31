@@ -50,10 +50,8 @@
 	<Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\RawFilterDataEventArgs.cs" />
     <Compile Include="Transformer\FlyTransformer.cs" />
-	<Compile Include="Transformer\ITransformer" />
-	<Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
-	<Compile Include="CollisionHandler\CollisionHandler.cs" />
+    <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />
@@ -61,6 +59,8 @@
     <Compile Include="Parser\RawParserDataEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformer\ITransformer.cs" />
+    <Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
