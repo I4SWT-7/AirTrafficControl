@@ -8,7 +8,8 @@ namespace TransponderReceiverApplication
 {
     public interface ICollisionHandler
     {
-        void WriteLogWarning(Fly fly);
+        //void WriteLogWarning(Fly fly);
+        void DataRecived();
 
         //void ReceiveData(List<Fly> data);
     }

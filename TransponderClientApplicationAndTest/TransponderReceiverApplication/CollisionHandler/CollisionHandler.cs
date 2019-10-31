@@ -13,19 +13,21 @@ namespace TransponderReceiverApplication
     public class CollisionHandler : ICollisionHandler
     {
         private List<Fly> data;
-        private CalculatorClass calculator;
         private ITransformer transformer;
-        private 
 
         public CollisionHandler(ITransformer receiver)
         {
             this.transformer = receiver;
             this.transformer.TransformerDataReady += ReceiveData;
         }
+        public void DataRecived()
+        {
+            Console.WriteLine("Event triggered in Collisionhandler");
+        }
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            
+            DataRecived();
         }
     }
 }
