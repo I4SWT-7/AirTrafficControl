@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace TransponderReceiverApplication
 {
-    class FlyTransformer : ITransformer
+    public class FlyTransformer : ITransformer
     {
         //List<Fly> FlyListing = new List<Fly>();
         private IParser receiver;
