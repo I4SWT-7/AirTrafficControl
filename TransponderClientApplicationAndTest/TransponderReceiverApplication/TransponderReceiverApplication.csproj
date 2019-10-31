@@ -46,11 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculator\CalculateCourse.cs" />
-    <Compile Include="Calculator\CalculateDistance.cs" />
-    <Compile Include="Calculator\CalculateSpeed.cs" />
-    <Compile Include="Calculator\SeperationCondition.cs" />
-    <Compile Include="Calculator\WriteLog.cs" />
+    <Compile Include="Transformer\FlyTransformer.cs" />
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
     <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
@@ -60,6 +56,8 @@
     <Compile Include="Parser\RawParserDataEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformer\ITransformer.cs" />
+    <Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
