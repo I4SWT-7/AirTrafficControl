@@ -12,24 +12,50 @@ namespace TransponderReceiverApplication
 {
     public class CollisionHandler : ICollisionHandler
     {
-        private List<Fly> data;
-        private ITransformer transformer;
+        private List<Fly> PreviousData;
+        private IFilter Receiver;
+        private CalculateCourse coursecalculator = new CalculateCourse();
+        private CalculateSpeed speedcalculator = new CalculateSpeed();
 
-        public CollisionHandler(ITransformer receiver)
+        public CollisionHandler(IFilter receiver)
         {
-            this.transformer = receiver;
-            this.transformer.TransformerDataReady += ReceiveData;
+            this.Receiver = receiver;
+            this.Receiver.FilterDataReady += ReceiveData;
         }
-        public void DataRecived()
+        public void DataRecived(List<Fly> flylist)
         {
-        }
-
-        public void ReceiveData(object sender, RawTransformerDataEventArgs e)
-        {
-            foreach(var data in e.FlyList)
+            if (PreviousData == null)
             {
-                Console.WriteLine($"CollisionFormat: {data.date}");
+                PreviousData = flylist;
             }
+            else
+            {
+                foreach(var prevfly in PreviousData)
+                {
+                    foreach(var newplane in flylist)
+                    {
+                        if(prevfly.Tag == newplane.Tag)
+                        {
+                            coursecalculator.CalcCourse(prevfly, newplane);
+                            speedcalculator.CalcSpeed(prevfly, newplane);
+                            
+                        }
+                    }
+                }
+
+                PreviousData = null;
+                PreviousData = flylist;
+            }
+        }
+
+        public void ReceiveData(object sender, RawFilterDataEventArgs e)
+        {
+            //Console.WriteLine("CollisionHandler");
+            foreach (var data in e.FlyList)
+            {
+                //Console.WriteLine($"{data.Tag} {data.xcor} {data.ycor} {data.zcor} {data.date}");
+            }
+            DataRecived(e.FlyList);
         }
     }
 }

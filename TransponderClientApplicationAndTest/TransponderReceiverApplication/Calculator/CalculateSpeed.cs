@@ -1,23 +1,22 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace TransponderReceiverApplication.Calculator
-//{
-//    class CalculateSpeed
-//    {
-//        private int distance;
-//        private int speed;
-//        private int timeStamps;
-//        int CalcSpeed(List<Fly> watchlist)
-//        {
-//            // To calculate the speed of an airplane we need two different timestamps from it
-//            timeStamps = Fly.date1 - Fly.date2;
-
-//            speed = distance / timeStamps;
-//            return speed;
-//        }
-//    }
-//}
+namespace TransponderReceiverApplication
+{
+    class CalculateSpeed
+    {
+        private int distance;
+        private double speed;
+        private TimeSpan timeStamps;
+        public double CalcSpeed(Fly prevfly, Fly newfly)
+        {
+            // To calculate the speed of an airplane we need two different timestamps from it
+            timeStamps = (prevfly.date - newfly.date);
+            speed = distance / timeStamps.TotalSeconds;
+            return speed;
+        }
+    }
+}

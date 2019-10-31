@@ -41,10 +41,12 @@ namespace TransponderReceiverApplication
 
         private void ReceiveData(object sender, RawParserDataEventArgs e)
         {
+            //Console.WriteLine("Transformer");
             for (int i = 0; i < e.Flylist.Count; i++)
             {
                 e.Flylist[i] = TransformData(e.Flylist[i]);
             }
+
             TransformerDataReady.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 

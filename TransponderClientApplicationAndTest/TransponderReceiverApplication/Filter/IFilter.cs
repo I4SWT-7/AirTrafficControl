@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     public interface IFilter
     {
