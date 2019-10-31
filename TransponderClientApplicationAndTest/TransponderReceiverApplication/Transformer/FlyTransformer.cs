@@ -20,7 +20,6 @@ namespace TransponderReceiverApplication
             this.receiver = receiver;
 
             this.receiver.ParserDataReady += ReceiveData;
-
         }
 
 
@@ -39,7 +38,7 @@ namespace TransponderReceiverApplication
             return transfly;    
         }
 
-        private void ReceiveData(object sender, RawParserDataEventArgs e)
+        public void ReceiveData(object sender, RawParserDataEventArgs e)
         {
             //Console.WriteLine("Transformer");
             for (int i = 0; i < e.Flylist.Count; i++)

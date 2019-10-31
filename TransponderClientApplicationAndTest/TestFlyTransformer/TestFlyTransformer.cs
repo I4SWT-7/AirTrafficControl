@@ -1,71 +1,70 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Globalization;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using NUnit.Framework;
-//using TransponderReceiverApplication;
-//using NSubstitute;
-//using TransponderReceiverApplication;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using TransponderReceiverApplication;
+using NSubstitute;
 
 
-//namespace TestFlyTransformer
-//{
-//    [TestFixture]
-//    public class TestFlyTransformer
-//    {
 
-//        //private FlyTransformer _uut;
+namespace TestFlyTransformer
+{
+    [TestFixture]
+    public class TestFlyTransformer
+    {
 
-//        private ITransformer _fakeITransformer;
+        private FlyTransformer _uut;
+        private IParser _fakeIParser;
+
         
         
 
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            // Make a Fake ITransformer
-//            _fakeITransformer = Substitute.For<ITransformer>();
-//            // Inject the fake TDR
-//        }
+        [SetUp]
+        public void SetUp()
+        {
+            // Make a Fake IParser
+            _fakeIParser = Substitute.For<IParser>();
+            // Inject the fake IParser
+            _uut = new FlyTransformer(_fakeIParser);
+        }
 
-//        [Test]
-//        public void FlyTransformer_TransformData_converts_correctly()
-//        {
-//            var uut = _fakeITransformer;
-//            //Make a test Fly object
-//            Fly testfly1 = new Fly();
-//            testfly1.date = DateTime.Now;
+        [Test]
+        public void FlyTransformer_TransformData_converts_correctly()
+        {
+            //Make a test Fly object
+            Fly testfly1 = new Fly();
 
-//            //Make teststring to assert to
-//            string teststring = testfly1.date.ToString("dd. MMM yyyy HH:mm:ss:fff");
+            //Make teststring to assert to
+            string teststring = testfly1.date.ToString("dd. MMM yyyy HH:mm:ss:fff ");
+            
+            //Assertion to check if TransformData transforms correctly
+            Assert.AreEqual(teststring, _uut.TransformData(testfly1).date.ToString());
+        }
 
-//            Assert.AreEqual(teststring, uut.TransformData(testfly1).ToString());
+        [Test]
+        public void FlyTransformer_TransformData_called_when_ReceieveData()
+        {
+            
+            // Act
+            _uut.ReceiveData();
 
-//            /*
-//            _fakeITransformer.TransformData(testfly1);
-//            var testtime = DateTime.ParseExact("12/02/21 10:56:09:555", "yy/MM/dd HH:mm:ss:fff",
-//                CultureInfo.InvariantCulture
-//            ).ToString("dd. MMM yyyy HH:mm:ss:fff");
+            // Assert on the mock - was the heater called correctly
+            Assert.That(_uut.TransformData, Is.EqualTo(1));
+        }
 
-//            Assert.AreEqual(testtime, testfly1.date.ToString("dd. MMM yyyy HH:mm:ss:fff"));
-//            */
-//        }
-//        /*
-//        [Test]
-//        public void FlyTransformer_correct_format_conversion()
-//        { }
+        /*
+        [Test]
+        public void FlyTransformer_receives_data()
+        { }
 
-//        [Test]
-//        public void FlyTransformer_receives_data()
-//        { }
+        [Test]
+        public void FlyTransformer_sends_data()
+        {
 
-//        [Test]
-//        public void FlyTransformer_sends_data()
-//        {
-
-//        }
-//        */
-//    }
-//}
+        }
+        */
+    }
+}
