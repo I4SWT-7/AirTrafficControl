@@ -51,13 +51,11 @@
     <Compile Include="Calculator\CalculateSpeed.cs" />
     <Compile Include="Calculator\SeperationCondition.cs" />
     <Compile Include="Calculator\WriteLog.cs" />
-    <Compile Include="CollisionHandler\CalculatorClass.cs" />
-    <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="Filter\Filter.cs" />
 	<Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\RawFilterDataEventArgs.cs" />
     <Compile Include="Transformer\FlyTransformer.cs" />
-	<Compile Include="Transformer\ITransformer" />
+	<Compile Include="Transformer\ITransformer.cs" />
 	<Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
 	<Compile Include="CollisionHandler\CollisionHandler.cs" />
