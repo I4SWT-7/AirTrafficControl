@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filter\Filter.cs" />
+	<Compile Include="Filter\IFilter.cs" />
+    <Compile Include="Filter\RawFilterDataEventArgs.cs" />
     <Compile Include="Transformer\FlyTransformer.cs" />
     <Compile Include="CollisionHandler\CalculatorClass.cs" />
     <Compile Include="CollisionHandler\CollisionHandler.cs" />
