@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
+using TransponderReceiverApplication;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
     public interface IFilter
     {

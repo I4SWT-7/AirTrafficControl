@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiverApplication;
 
-namespace TransponderReceiverApplication.Filter
+namespace TransponderReceiverApplication
 {
-    class Filter : IFilter
+    public class Filter : IFilter
     {
-        private FlyTransformer receiver;
+        private ITransformer receiver;
         public event EventHandler<RawFilterDataEventArgs> FilterDataReady;
 
-        public Filter(FlyTransformer receiver)
+        public Filter(ITransformer receiver)
         {
             this.receiver = receiver;
 
