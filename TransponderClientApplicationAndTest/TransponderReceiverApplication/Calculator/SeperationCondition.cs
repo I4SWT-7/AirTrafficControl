@@ -12,7 +12,20 @@ namespace TransponderReceiverApplication
         private WriteLog logger = new WriteLog();
         public void SepCond(Fly prevfly, Fly Newfly)
         {
-            if (prevfly.Tag != Newfly.Tag && (prevfly.zcor - Newfly.zcor) < 300)
+            int biggestzvalue;
+            int smallestzvalue;
+            if (prevfly.zcor > Newfly.zcor)
+            {
+                biggestzvalue = prevfly.zcor;
+                smallestzvalue = Newfly.zcor;
+            }
+            else
+            {
+                biggestzvalue = Newfly.zcor;
+                smallestzvalue = prevfly.zcor;
+            }
+            Console.WriteLine($"{biggestzvalue} {smallestzvalue}");
+            if (prevfly.Tag != Newfly.Tag && (biggestzvalue - smallestzvalue) < 300)
             {
                 if (prevfly.Tag != Newfly.Tag && calcdistance.CalcDistance(Newfly, prevfly) < 5000)
                 {
