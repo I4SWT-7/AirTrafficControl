@@ -16,6 +16,8 @@ namespace TransponderReceiverApplication
         private IFilter Receiver;
         private CalculateCourse coursecalculator = new CalculateCourse();
         private CalculateSpeed speedcalculator = new CalculateSpeed();
+        private CalculateDistance distancecalculator = new CalculateDistance();
+        private CheckForSepCond SeperationCalculator = new CheckForSepCond();
 
         public CollisionHandler(IFilter receiver)
         {
@@ -24,6 +26,7 @@ namespace TransponderReceiverApplication
         }
         public void DataRecived(List<Fly> flylist)
         {
+
             if (PreviousData == null)
             {
                 PreviousData = flylist;
@@ -38,8 +41,10 @@ namespace TransponderReceiverApplication
                         {
                             coursecalculator.CalcCourse(prevfly, newplane);
                             speedcalculator.CalcSpeed(prevfly, newplane);
-                            
                         }
+                        distancecalculator.CalcDistance(prevfly, newplane);
+                        SeperationCalculator.SepCond(prevfly, newplane);
+
                     }
                 }
 

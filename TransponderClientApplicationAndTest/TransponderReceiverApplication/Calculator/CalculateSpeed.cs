@@ -8,13 +8,15 @@ namespace TransponderReceiverApplication
 {
     class CalculateSpeed
     {
-        private int distance;
+        private double distance;
         private double speed;
         private TimeSpan timeStamps;
+        private CalculateDistance distancecalc = new CalculateDistance();
         public double CalcSpeed(Fly prevfly, Fly newfly)
         {
             // To calculate the speed of an airplane we need two different timestamps from it
             timeStamps = (prevfly.date - newfly.date);
+            distance = distancecalc.CalcDistance(prevfly, newfly);
             speed = distance / timeStamps.TotalSeconds;
             return speed;
         }
