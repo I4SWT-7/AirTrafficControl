@@ -22,12 +22,8 @@ namespace TransponderReceiverApplication
 
         private void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-<<<<<<< HEAD
             //Console.WriteLine("Filter");
-            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(Filterdata(e.FlyList)));
-=======
-            FilterDataReady.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
->>>>>>> 38e5c9ff3f46968fdb72535fff97f379d38793bc
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
         }
 
         public List<Fly> FilterData(List<Fly> data)
