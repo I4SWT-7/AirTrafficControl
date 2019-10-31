@@ -46,6 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Transformer\FlyTransformer.cs" />
+	<Compile Include="Transformer\ITransformer" />
+	<Compile Include="Transformer\RawTransformerDataEventArgs.cs" />
+    <Compile Include="CollisionHandler\CalculatorClass.cs" />
+	<Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />

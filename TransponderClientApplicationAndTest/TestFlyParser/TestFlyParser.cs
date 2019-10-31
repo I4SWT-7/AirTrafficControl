@@ -10,7 +10,7 @@ namespace TestFlyParser
     public class TestFlyParser
     {
         private ITransponderReceiver _fakeTransponderReceiver;
-        private TransponderReceiverClient _uut;
+        private TransponderReceiverClient _uut;     
 
         [SetUp]
         public void Setup()
