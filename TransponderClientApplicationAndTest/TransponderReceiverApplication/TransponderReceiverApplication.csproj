@@ -46,6 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\CalculateCourse.cs" />
+    <Compile Include="Calculator\CalculateDistance.cs" />
+    <Compile Include="Calculator\CalculateSpeed.cs" />
+    <Compile Include="Calculator\SeperationCondition.cs" />
+    <Compile Include="Calculator\WriteLog.cs" />
+    <Compile Include="CollisionHandler\CalculatorClass.cs" />
+    <Compile Include="CollisionHandler\CollisionHandler.cs" />
     <Compile Include="CollisionHandler\ICollisionHandler.cs" />
     <Compile Include="Fly.cs" />
     <Compile Include="Parser\FlyParser.cs" />
