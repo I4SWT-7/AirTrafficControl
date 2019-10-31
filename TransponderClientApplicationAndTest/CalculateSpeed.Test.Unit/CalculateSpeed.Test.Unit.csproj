@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0426C42-69FF-480C-9137-1E29A405A04C}</ProjectGuid>
+    <ProjectGuid>{5270DBE2-B1A0-4CFF-96C5-2DFC48CE31F1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Calculator.Test.Unit</RootNamespace>
-    <AssemblyName>Calculator.Test.Unit</AssemblyName>
+    <RootNamespace>CalculateSpeed.Test.Unit</RootNamespace>
+    <AssemblyName>CalculateSpeed.Test.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculateDistanceTest.cs" />
+    <Compile Include="CalculateSpeedTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
