@@ -22,14 +22,13 @@ namespace TransponderReceiverApplication
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            FilterData(e.TransFlyList); 
-            
+            FilterFlyList.Clear();
+            FilterData(e.TransFlyList);
             FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
 
         public List<Fly> FilterData(List<Fly> data)
         {
-            FilterFlyList.Clear();
             int count = data.Count;
             for (int i = 0; i < count; i++)
             {

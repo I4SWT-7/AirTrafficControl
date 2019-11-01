@@ -30,9 +30,12 @@ namespace TransponderReceiverApplication
         public void DataRecived(List<Fly> flylist)
         {
 
-            if (PreviousData == null)
+            if (PreviousData.Count == 0)
             {
-                PreviousData = flylist;
+                for (int i = 0; i < flylist.Count; i++)
+                {
+                    PreviousData.Add(flylist[i]);
+                }
             }
             else
             {
@@ -48,14 +51,17 @@ namespace TransponderReceiverApplication
                         }
                         distancecalculator.CalcDistance(prevfly, newplane);
                         SeperationCalculator.SepCond(prevfly, newplane);
-                        Console.WriteLine("Distance:");
-                        Console.WriteLine(distancecalculator.CalcDistance(prevfly, newplane));
+                       // Console.WriteLine("Distance:");
+                       // Console.WriteLine(distancecalculator.CalcDistance(prevfly, newplane));
 
                     }
                 }
-
                 PreviousData.Clear();
-                PreviousData = flylist;
+                for (int i = 0; i < flylist.Count; i++)
+                {
+                    PreviousData.Add(flylist[i]);
+
+                }
             }
         }
 

@@ -18,7 +18,11 @@ namespace TransponderReceiverApplication
             timeStamps = (prevfly.date - newfly.date);
             distance = distancecalc.CalcDistance(prevfly, newfly);
             speed = distance / timeStamps.TotalSeconds;
-           
+
+            if (speed < 0)
+            {
+                speed *= -1;
+            }
             return Math.Round(speed, 2);
         }
     }
