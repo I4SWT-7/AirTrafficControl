@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using TransponderReceiverApplication;
 using NSubstitute;
 using NUnit.Framework;
@@ -39,11 +38,21 @@ namespace TestFlyParser
             assertfly.Add(fly3);
         }
 
-        //[Test]
-        //public void TestReceiveData()
-        //{
-
-        //}
+        [Test]
+        public void TestReceive()
+        {
+            // Act: Trigger the fake object to execute event invocation
+            //receiver.TransponderDataReady
+            //    += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+            for (int i = 0; i < assertfly.Count; i++)
+            {
+                Assert.That(uut.Parsedata(testData)[i].Tag, Is.EqualTo(assertfly[i].Tag));
+                Assert.That(uut.Parsedata(testData)[i].xcor, Is.EqualTo(assertfly[i].xcor));
+                Assert.That(uut.Parsedata(testData)[i].ycor, Is.EqualTo(assertfly[i].ycor));
+                Assert.That(uut.Parsedata(testData)[i].zcor, Is.EqualTo(assertfly[i].zcor));
+                Assert.That(uut.Parsedata(testData)[i].date.ToString(), Is.EqualTo(assertfly[i].date.ToString()));
+            }
+        }
 
         [Test]
         public void TestTag()
