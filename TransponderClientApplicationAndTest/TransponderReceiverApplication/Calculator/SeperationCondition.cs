@@ -30,7 +30,6 @@ namespace TransponderReceiverApplication
                 if (prevfly.Tag != Newfly.Tag && calcdistance.CalcDistance(Newfly, prevfly) < 5000)
                 {
                     logger.WriteLogWarning(prevfly, Newfly);
-
                 }
             }
         }

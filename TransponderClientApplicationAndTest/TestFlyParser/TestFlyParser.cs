@@ -1,50 +1,129 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using TransponderReceiverApplication;
-//using NSubstitute;
-//using NUnit.Framework;
-//using TransponderReceiver;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using TransponderReceiverApplication;
+using NSubstitute;
+using NUnit.Framework;
+using TransponderReceiver;
 
-//namespace TestFlyParser
-//{
-//    [TestFixture]
-//    public class TestFlyParser
-//    {
-//        private ITransponderReceiver receiver;
-//        private FlyParser uut;
+namespace TestFlyParser
+{
+    [TestFixture]
+    public class TestFlyParser
+    {
+        private ITransponderReceiver receiver;
+        private FlyParser uut;
+        List<Fly> assertfly = new List<Fly>();
+        List<string> testData = new List<string>();
 
-//        [SetUp]
-//        public void Setup()
-//        {
-//            // Make a fake Transponder Data Receiver
-//            receiver = Substitute.For<ITransponderReceiver>();
-//            // Inject the fake TDR
-//            uut = new FlyParser(receiver);
-//        }
+        [SetUp]
+        public void Setup()
+        {
+            // Make a fake Transponder Data Receiver
+            receiver = Substitute.For<ITransponderReceiver>();
+            // Inject the fake TDR
+            uut = new FlyParser(receiver);
 
-//        [Test]
-//        public void TestReception()
-//        {
-//            // Setup test data
-//            List<string> testData = new List<string>();
-//            testData.Add("ATR423;39045;12932;14000;20151006213456789");
-//           // testData.Add("BCD123;10005;85890;12000;20151006213456789");
-//           // testData.Add("XYZ987;25059;75654;4000;20151006213456789");
-//            List<Fly> assertfly = new List<Fly>();
-//            Fly fly1 = new Fly();
-//            fly1.Tag = "ATR423";
-//            fly1.xcor = 39045;
-//            fly1.ycor = 12932;
-//            fly1.zcor = 14000;
-//            fly1.date = DateTime.Parse("20151006213456789");
-//            assertfly.Add(fly1);
+            // Setup test data
+            testData.Add("ATR423;39045;12932;14000;20151006213456789");
+            testData.Add("BCD123;10005;85890;12000;20151006213456789");
+            testData.Add("XYZ987;25059;75654;4000;20151006213456789");
+            Fly fly1 = new Fly("ATR423", 39045, 12932, 14000);
+            Fly fly2 = new Fly("BCD123", 10005, 85890, 12000);
+            Fly fly3 = new Fly("XYZ987", 25059, 75654, 4000);
+            fly1.date = DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", null);
+            fly2.date = DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", null);
+            fly3.date = DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", null);
+            assertfly.Add(fly1);
+            assertfly.Add(fly2);
+            assertfly.Add(fly3);
+        }
 
+        //[Test]
+        //public void TestReceiveData()
+        //{
 
-//            Assert.That(uut.Parsedata(testData), Is.EqualTo(assertfly));
-//            // Assert something here or use an NSubstitute Received
-//        }
-//    }
-//}
+        //}
+
+        [Test]
+        public void TestTag()
+        {
+            ReceptionHelp(assertfly, testData);
+
+            //Help function
+            void ReceptionHelp(List<Fly> expectedResult, List<string> inputdata)
+            {
+                List<Fly> returnedfly = new List<Fly>();
+                returnedfly = uut.Parsedata(inputdata);
+                for (int i = 0; i < expectedResult.Count; i++)
+                {
+                    Assert.That(returnedfly[i].Tag, Is.EqualTo(expectedResult[i].Tag));
+                }
+            }
+        }
+        [Test]
+        public void TestX()
+        {
+            ReceptionHelp(assertfly, testData);
+
+            //Help function
+            void ReceptionHelp(List<Fly> expectedResult, List<string> inputdata)
+            {
+                List<Fly> returnedfly = new List<Fly>();
+                returnedfly = uut.Parsedata(inputdata);
+                for (int i = 0; i < expectedResult.Count; i++)
+                {
+                    Assert.That(returnedfly[i].xcor, Is.EqualTo(expectedResult[i].xcor));
+                }
+            }
+        }
+        [Test]
+        public void Testy()
+        {
+            ReceptionHelp(assertfly, testData);
+
+            //Help function
+            void ReceptionHelp(List<Fly> expectedResult, List<string> inputdata)
+            {
+                List<Fly> returnedfly = new List<Fly>();
+                returnedfly = uut.Parsedata(inputdata);
+                for (int i = 0; i < expectedResult.Count; i++)
+                {
+                    Assert.That(returnedfly[i].ycor, Is.EqualTo(expectedResult[i].ycor));
+                }
+            }
+        }
+        [Test]
+        public void Testz()
+        {
+            ReceptionHelp(assertfly, testData);
+
+            //Help function
+            void ReceptionHelp(List<Fly> expectedResult, List<string> inputdata)
+            {
+                List<Fly> returnedfly = new List<Fly>();
+                returnedfly = uut.Parsedata(inputdata);
+                for (int i = 0; i < expectedResult.Count; i++)
+                {
+                    Assert.That(returnedfly[i].zcor, Is.EqualTo(expectedResult[i].zcor));
+                }
+            }
+        }
+        [Test]
+        public void Testdate()
+        {
+            ReceptionHelp(assertfly, testData);
+
+            //Help function
+            void ReceptionHelp(List<Fly> expectedResult, List<string> inputdata)
+            {
+                List<Fly> returnedfly = new List<Fly>();
+                returnedfly = uut.Parsedata(inputdata);
+                for (int i = 0; i < expectedResult.Count; i++)
+                {
+                    Assert.That(returnedfly[i].date.ToString(), Is.EqualTo(expectedResult[i].date.ToString()));
+                }
+            }
+        }
+    }
+}
