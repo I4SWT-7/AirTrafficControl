@@ -1,24 +1,34 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using NUnit.Framework;
-//using TransponderReceiverApplication;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using TransponderReceiverApplication;
 
-//namespace CalculateCourse.Test.Unit
-//{
-//    [TestFixture]
-//    public class CalculateCourseTest
-//    {
-//        [TestCase()]
-//        public void CalcCourse_xcor1_ycor1_xcor2_ycor2(int a, int b, int c, int d, int e)
-//        {
-//            //Arrange
-//            var uut = new CalculateCourse();
+namespace CalculateCourse.Test.Unit
+{
+    [TestFixture]
+    public class CalculateCourseTest
+    {
+        Fly Fly1 = new Fly("TAG123", 1, 1, 500);
+        Fly Fly2 = new Fly("TAG123", 100, 100, 1000);
+        [Test]
+        public void CalcCourse_45degrees()
+        {
+            //Arrange
+            var uut = new TransponderReceiverApplication.CalculateCourse();
 
-//            // Act & Assert
-//            Assert.That(uut.CalcCourse(a, b, c, d), Is.EqualTo(e));
-//        }
-//    }
-//}
+            // Act & Assert
+            Assert.That(uut.CalcCourse(Fly1, Fly2), Is.EqualTo(45));
+        }
+        public void CalcCourse_180degrees()
+        {
+            //Arrange
+            var uut = new TransponderReceiverApplication.CalculateCourse();
+
+            // Act & Assert
+            Assert.That(uut.CalcCourse(Fly1, Fly2), Is.EqualTo(45));
+        }
+    }
+}
