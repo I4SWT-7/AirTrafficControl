@@ -62,8 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateCourseTest.cs" />
+    <Compile Include="CalculateDistanceTest.cs" />
+    <Compile Include="CalculateSpeedTest.cs" />
+    <Compile Include="SeperationConditionTest.cs" />
+    <Compile Include="TestFilter.cs" />
     <Compile Include="TestFlyParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestFlyTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TransponderReceiverApplication\TransponderReceiverApplication.csproj">

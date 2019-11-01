@@ -22,9 +22,7 @@ namespace TransponderReceiverApplication
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            Console.WriteLine($"Filter received: {e.TransFlyList.Count}");
             FilterData(e.TransFlyList); 
-            Console.WriteLine($"Filter: {FilterFlyList.Count}");
             
             FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
@@ -53,9 +51,9 @@ namespace TransponderReceiverApplication
                 }
                 if (tagCount > 1 || 10000 > x || x > 90000 || 10000 > y || y > 90000 || 500 > z || z > 20000)
                 {
-                   // data.RemoveAt(i);
-                   // count--;
-                   // i--;
+                    data.RemoveAt(i);
+                    count--;
+                    i--;
                 }
                 else
                 {
@@ -63,7 +61,6 @@ namespace TransponderReceiverApplication
                 }
                
             }
-            Console.WriteLine(data.Count());
             return data;
         }
     }
