@@ -12,15 +12,15 @@ namespace TransponderReceiverApplication
 {
     public class CollisionHandler : ICollisionHandler
     {
-        private List<Fly> PreviousData = new List<Fly>();
+        public List<Fly> PreviousData = new List<Fly>();
         private IFilter Receiver;
         private ConsoleDisplay display = new ConsoleDisplay();
         private CalculateCourse coursecalculator = new CalculateCourse();
         private CalculateSpeed speedcalculator = new CalculateSpeed();
         private CalculateDistance distancecalculator = new CalculateDistance();
         private CheckForSepCond SeperationCalculator = new CheckForSepCond();
-        private double speed = 0;
-        private double course = 0;
+        public double speed = 0;
+        public double course = 0;
 
         public CollisionHandler(IFilter receiver)
         {
