@@ -60,7 +60,7 @@ namespace TestCollisionHandler.Test.Unit
 
             // This asserts that uut has connected to the event
             // And handles value correctly
-            Assert.That(_uut.PreviousData == _testFlyList);
+            Assert.That(_uut.PreviousData[0].Tag == _testFlyList[0].Tag);
         }
 
         [Test]
