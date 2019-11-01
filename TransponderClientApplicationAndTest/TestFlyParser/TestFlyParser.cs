@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Castle.Core.Smtp;
 using TransponderReceiverApplication;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,6 +16,8 @@ namespace TestFlyParser
         private FlyParser uut;
         List<Fly> assertfly = new List<Fly>();
         List<string> testData = new List<string>();
+        public event EventHandler<RawTransponderDataEventArgs> TransponderDataTestReady;
+
 
         [SetUp]
         public void Setup()
@@ -23,8 +27,8 @@ namespace TestFlyParser
             // Inject the fake TDR
             uut = new FlyParser(receiver);
 
-            // Setup test data
-            testData.Add("ATR423;39045;12932;14000;20151006213456789");
+        // Setup test data
+        testData.Add("ATR423;39045;12932;14000;20151006213456789");
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
             testData.Add("XYZ987;25059;75654;4000;20151006213456789");
             Fly fly1 = new Fly("ATR423", 39045, 12932, 14000);
@@ -38,21 +42,15 @@ namespace TestFlyParser
             assertfly.Add(fly3);
         }
 
-        [Test]
-        public void TestReceive()
-        {
-            // Act: Trigger the fake object to execute event invocation
-            //receiver.TransponderDataReady
-            //    += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
-            for (int i = 0; i < assertfly.Count; i++)
-            {
-                Assert.That(uut.Parsedata(testData)[i].Tag, Is.EqualTo(assertfly[i].Tag));
-                Assert.That(uut.Parsedata(testData)[i].xcor, Is.EqualTo(assertfly[i].xcor));
-                Assert.That(uut.Parsedata(testData)[i].ycor, Is.EqualTo(assertfly[i].ycor));
-                Assert.That(uut.Parsedata(testData)[i].zcor, Is.EqualTo(assertfly[i].zcor));
-                Assert.That(uut.Parsedata(testData)[i].date.ToString(), Is.EqualTo(assertfly[i].date.ToString()));
-            }
-        }
+        //[Test]
+        //public void TestReceive()
+        //{
+        //    // Act: Trigger the fake object to execute event invocation
+        //    receiver.TransponderDataReady
+        //        += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+
+        //    Assert.That(uut.FlyList, Is.EqualTo(assertfly));
+        //}
 
         [Test]
         public void TestTag()

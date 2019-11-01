@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
 using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 using NUnit.Framework;
 using TransponderReceiverApplication;
 
@@ -15,11 +16,10 @@ namespace TestFilter.Test.Unit
     public class TestFilter
     {
         private ITransformer _fakeTransformer;
-        private ICollisionHandler _fakeCollisionHandler;
         private Filter _uut;
+        private RawFilterDataEventArgs _TestFilterEventArg;
 
         private List<Fly> _testFlyList;
-        private int _numberOfEvents;
         private readonly Fly _noProblemFly1 = new Fly("NoProblemFly1", 10000, 10000, 500);
         private readonly Fly _noProblemFly2 = new Fly("NoProblemFly2", 10001, 10001, 501);
         private readonly Fly _noProblemFly3 = new Fly("NoProblemFly3", 90000, 90000, 20000);
@@ -38,33 +38,41 @@ namespace TestFilter.Test.Unit
         public void SetUp()
         {
             _fakeTransformer = Substitute.For<ITransformer>();
-            _fakeCollisionHandler = Substitute.For<ICollisionHandler>();
             _uut = new Filter(_fakeTransformer);
 
-        _testFlyList = new List<Fly>() 
+            _testFlyList = new List<Fly>() 
             {
                 //_noProblemFly1, _noProblemFly2, _noProblemFly3, _noProblemFly4, 
                 //_nameProblemFly1, _nameProblemFly2, _xCoorHighProblemFly,
                 //_xCoorLowProblemFly, _yCoorHighProblemFly, _yCoorLowProblemFly,
                 //_zCoorHighProblemFly, _zCoorLowProblemFly
             };
-            _numberOfEvents = 0;
+            _TestFilterEventArg = null;
+            _uut.FilterDataReady += (o, arg) => { _TestFilterEventArg = arg; };
         }
 
-        //[Test]
-        //public void Event_Received_From_Transformer()
-        //{
-        //    _testFlyList.Add(_noProblemFly1);
-        //    // Raise event in fake
-        //    _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
-        //        this,
-        //        new RawTransformerDataEventArgs(_testFlyList));
+        [Test]
+        public void Event_Received_From_Transformer()
+        {
+            _testFlyList.Add(_noProblemFly1);
+            _testFlyList.Add(_noProblemFly2);
+            
+            // Raise event in fake
+            _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
+                this,
+                new RawTransformerDataEventArgs(_testFlyList) {  });
 
-        //    // This asserts that uut has connected to the event
-        //    // And handles value correctly
-        //    Assert.That(_uut.FilterFlyList.Count == 1);
-        //}
+            // This asserts that uut has connected to the event
+            // And handles value correctly
+            Assert.That(_uut.FilterFlyList.Count == 2);
+        }
 
+        [Test]
+        public void Event_Sent()
+        {
+            _uut.ReceiveData(this,new RawTransformerDataEventArgs(_testFlyList));
+            Assert.That(_TestFilterEventArg, Is.Not.Null);
+        }
 
         [Test]
         public void FilterData_No_Legal_Fly_Deleted()
