@@ -29,10 +29,6 @@ namespace TransponderReceiverApplication
 
         public List<Fly> FilterData(List<Fly> data)
         {
-            foreach (var fly in data)
-            {
-                Console.WriteLine($"Fly x and y: {fly.xcor} {fly.ycor} {fly.zcor}");
-            }
             FilterFlyList.Clear();
             int count = data.Count;
             for (int i = 0; i < count; i++)
@@ -61,7 +57,7 @@ namespace TransponderReceiverApplication
                 }
                
             }
-            return data;
+            return FilterFlyList;
         }
     }
 }
