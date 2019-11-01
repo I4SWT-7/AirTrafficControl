@@ -22,19 +22,13 @@ namespace TransponderReceiverApplication
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            Console.WriteLine($"Filter received: {e.TransFlyList.Count}");
-            FilterData(e.TransFlyList); 
-            Console.WriteLine($"Filter: {FilterFlyList.Count}");
-            
+            FilterData(e.TransFlyList);
+
             FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
 
         public List<Fly> FilterData(List<Fly> data)
         {
-            foreach (var fly in data)
-            {
-                Console.WriteLine($"Fly x and y: {fly.xcor} {fly.ycor} {fly.zcor}");
-            }
             FilterFlyList.Clear();
             int count = data.Count;
             for (int i = 0; i < count; i++)
@@ -53,9 +47,9 @@ namespace TransponderReceiverApplication
                 }
                 if (tagCount > 1 || 10000 > x || x > 90000 || 10000 > y || y > 90000 || 500 > z || z > 20000)
                 {
-                   // data.RemoveAt(i);
-                   // count--;
-                   // i--;
+                    data.RemoveAt(i);
+                    count--;
+                    i--;
                 }
                 else
                 {
@@ -63,8 +57,7 @@ namespace TransponderReceiverApplication
                 }
                
             }
-            Console.WriteLine(data.Count());
-            return data;
+            return FilterFlyList;
         }
     }
 }
