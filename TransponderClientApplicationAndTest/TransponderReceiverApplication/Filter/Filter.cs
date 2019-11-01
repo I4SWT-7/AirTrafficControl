@@ -18,13 +18,12 @@ namespace TransponderReceiverApplication
             this.receiver = receiver;
 
             this.receiver.TransformerDataReady += ReceiveData;
-
         }
 
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
-            //Console.WriteLine("Filter");
             FilterData(e.TransFlyList);
+
             FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
 
@@ -58,7 +57,7 @@ namespace TransponderReceiverApplication
                 }
                
             }
-            return data;
+            return FilterFlyList;
         }
     }
 }
