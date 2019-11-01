@@ -52,7 +52,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-	<Compile Include="ConsoleDisplay.cs"/>
     <Compile Include="Calculator\CalculateCourse.cs" />
     <Compile Include="Calculator\CalculateDistance.cs" />
     <Compile Include="Calculator\CalculateSpeed.cs" />
