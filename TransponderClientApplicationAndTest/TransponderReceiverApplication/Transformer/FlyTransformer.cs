@@ -34,15 +34,25 @@ namespace TransponderReceiverApplication
         public void ReceiveData(object sender, RawParserDataEventArgs e)
         {
             TransFlyList.Clear();
-            //Console.WriteLine("Transformer");
             for (int i = 0; i < e.Flylist.Count; i++)
             {
-                //e.Flylist[i] = TransformData(e.Flylist[i]);
                 TransformData(e.Flylist[i]);
                 TransFlyList.Add(e.Flylist[i]);
                 
             }
-            //TransFlyList = e.Flylist;
+
+            foreach (var fly in e.Flylist)
+            {
+                Console.WriteLine(fly.Tag);
+                Console.WriteLine(fly.xcor);
+                Console.WriteLine(fly.ycor);
+                Console.WriteLine(fly.zcor);
+                Console.WriteLine(fly.date.ToString());
+
+
+
+
+            }
             TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 

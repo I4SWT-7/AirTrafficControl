@@ -15,6 +15,7 @@ namespace CalculateSpeed.Test.Unit
         Fly Fly2 = new Fly("TAG123", 9000,9000, 1000);
         Fly Fly1NotMoving = new Fly("TAG123", 60, 80, 1000);
         Fly Fly2NotMoving = new Fly("TAG123", 60, 80, 1000);
+
         [Test]
         public void CalcSpeed_distance_timeStamps_ReturnResult()
         {

@@ -19,6 +19,8 @@ namespace TestFlyTransformer
         private IFilter _fakeFilter;
 
         private FlyTransformer _uut;
+        private RawTransformerDataEventArgs _testTransformerDataEventArgs;
+
         private IParser _fakeIParser;
         private List<Fly> _testFlyList;
         private Fly testfly1 = new Fly();
@@ -28,6 +30,8 @@ namespace TestFlyTransformer
         [SetUp]
         public void SetUp()
         {
+            
+
             // Make a test Flylist
             _testFlyList = new List<Fly>();
             // Make a Fake IParser
@@ -35,7 +39,12 @@ namespace TestFlyTransformer
             // Injection
             _uut = new FlyTransformer(_fakeIParser);
 
-            
+
+            // Setting _testTransformerDataEventArgs to null
+            _testTransformerDataEventArgs = null;
+
+            // Setting up event listener to check event
+            _uut.TransformerDataReady += (o, args) => { _testTransformerDataEventArgs = args; };
 
         }
 
@@ -62,11 +71,28 @@ namespace TestFlyTransformer
 
             _fakeIParser.ParserDataReady +=
                 Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_testFlyList));
+            
+
+            _fakeIParser.ParserDataReady +=
+                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_testFlyList));
             Assert.That(_uut.TransFlyList, Is.EqualTo(_testFlyList));
 
         }
 
+        [Test]
+        public void Transformer_event_fired()
+        {
+            _uut.ReceiveData(this,new RawParserDataEventArgs(_testFlyList));
+            Assert.That(_testTransformerDataEventArgs, Is.Not.Null);
+        }
 
+        [Test]
+        public void Transformer_event_fired_with_correct_list()
+        {
+            _testFlyList.Add(testfly1);
+            _uut.ReceiveData(this, new RawParserDataEventArgs(_testFlyList));
+            Assert.That(_testTransformerDataEventArgs.TransFlyList, Is.EqualTo(_testFlyList));
+        }
 
     }
 }
