@@ -37,9 +37,11 @@ namespace TransponderReceiverApplication
             for (int i = 0; i < e.Flylist.Count; i++)
             {
                 e.Flylist[i] = TransformData(e.Flylist[i]);
+                TransFlyList[i] = e.Flylist[i];
             }
-            TransFlyList = e.Flylist;
-            TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(TransFlyList));
+            Console.WriteLine(TransFlyList[0].Tag);
+            //TransFlyList = e.Flylist;
+            TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 
     }
