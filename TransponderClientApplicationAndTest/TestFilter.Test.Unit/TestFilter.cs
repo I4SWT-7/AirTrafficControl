@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiverApplication;
@@ -13,9 +14,9 @@ namespace TestFilter.Test.Unit
     [TestFixture]
     public class TestFilter
     {
-        private Filter _uut;
         private ITransformer _fakeTransformer;
-
+        private ICollisionHandler _fakeCollisionHandler;
+        private Filter _uut;
 
         private List<Fly> _testFlyList;
         private int _numberOfEvents;
@@ -37,9 +38,10 @@ namespace TestFilter.Test.Unit
         public void SetUp()
         {
             _fakeTransformer = Substitute.For<ITransformer>();
+            _fakeCollisionHandler = Substitute.For<ICollisionHandler>();
             _uut = new Filter(_fakeTransformer);
 
-        _testFlyList = new List<Fly>() 
+            _testFlyList = new List<Fly>() 
             {
                 //_noProblemFly1, _noProblemFly2, _noProblemFly3, _noProblemFly4, 
                 //_nameProblemFly1, _nameProblemFly2, _xCoorHighProblemFly,
@@ -48,6 +50,24 @@ namespace TestFilter.Test.Unit
             };
             _numberOfEvents = 0;
         }
+
+        [Test]
+        public void Event_Received_From_Transformer()
+        {
+            _testFlyList.Add(_noProblemFly1);
+            _testFlyList.Add(_noProblemFly2);
+            //_uut.FilterData(_testFlyList);
+            // Raise event in fake
+            _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
+                this,
+                new RawTransformerDataEventArgs(_testFlyList) {  });
+
+            // This asserts that uut has connected to the event
+            // And handles value correctly
+            //Assert.That(_uut.FilterFlyList[0] == _noProblemFly1);
+            Assert.That(_uut.FilterFlyList.Count == 2);
+        }
+
 
         [Test]
         public void FilterData_No_Legal_Fly_Deleted()

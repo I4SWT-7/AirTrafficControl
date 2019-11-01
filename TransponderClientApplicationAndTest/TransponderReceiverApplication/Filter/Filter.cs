@@ -10,6 +10,7 @@ namespace TransponderReceiverApplication
     public class Filter : IFilter
     {
         private ITransformer receiver;
+        public List<Fly> FilterFlyList = new List<Fly>();
         public event EventHandler<RawFilterDataEventArgs> FilterDataReady;
 
         public Filter(ITransformer receiver)
@@ -23,11 +24,13 @@ namespace TransponderReceiverApplication
         public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
             //Console.WriteLine("Filter");
-            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.TransFlyList)));
+            FilterData(e.TransFlyList);
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
 
         public List<Fly> FilterData(List<Fly> data)
         {
+            FilterFlyList.Clear();
             int count = data.Count;
             for (int i = 0; i < count; i++)
             {
@@ -49,6 +52,11 @@ namespace TransponderReceiverApplication
                     count--;
                     i--;
                 }
+                else
+                {
+                    FilterFlyList.Add(data[i]);
+                }
+               
             }
             return data;
         }
