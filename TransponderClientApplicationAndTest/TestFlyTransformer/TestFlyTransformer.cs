@@ -16,60 +16,57 @@ namespace TestFlyTransformer
     [TestFixture]
     public class TestFlyTransformer
     {
+        private IFilter _fakeFilter;
 
         private FlyTransformer _uut;
         private IParser _fakeIParser;
-        private List<Fly> _fakeFlyList;
-        private Fly testfly1;
+        private List<Fly> _testFlyList;
+        private Fly testfly1 = new Fly();
+        private Fly testfly2 = new Fly();
 
 
         [SetUp]
         public void SetUp()
         {
+            // Make a test Flylist
+            _testFlyList = new List<Fly>();
             // Make a Fake IParser
             _fakeIParser = Substitute.For<IParser>();
-            // Inject the fake IParser
+            // Injection
             _uut = new FlyTransformer(_fakeIParser);
-            _fakeFlyList = new List<Fly>();
+
+            
+
         }
 
         [Test]
         public void FlyTransformer_TransformData_converts_correctly()
         {
-            //Make a test Fly object
-            testfly1 = new Fly();
-
+            
             //Make teststring to assert to
-            string teststring = testfly1.date.ToString("dd. MMM yyyy HH:mm:ss:fff ");
+            string teststring = testfly2.date.ToString("dd. MMM yyyy HH:mm:ss:fff ");
             
             //Assertion to check if TransformData transforms correctly
-            Assert.AreEqual(teststring, _uut.TransformData(testfly1).date.ToString());
+            Assert.AreEqual(teststring, _uut.TransformData(testfly2).date.ToString());
         }
 
         
-        public void FlyTransformer_TransformData_called_when_ReceieveData()
-        {
-        }
 
         
         [Test]
-        public void FlyTransformer_receives_data(/*List<Fly> newFlyList*/)
+        public void FlyTransformer_receives_data()
         {
-            _fakeFlyList.Add(testfly1);
-
+            
+            _testFlyList.Add(testfly1);
+            _testFlyList.Add(testfly2);
 
             _fakeIParser.ParserDataReady +=
-                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_fakeFlyList) /*{Flylist = newFlyList}*/);
-
-            Assert.That(_uut.TransFlyList[0] == testfly1);
-
-        }
-        /*
-        [Test]
-        public void FlyTransformer_sends_data()
-        {
+                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_testFlyList));
+            Assert.That(_uut.TransFlyList, Is.EqualTo(_testFlyList));
 
         }
-        */
+
+
+
     }
 }

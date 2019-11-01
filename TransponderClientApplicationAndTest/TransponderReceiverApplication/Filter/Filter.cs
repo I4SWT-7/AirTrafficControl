@@ -20,10 +20,10 @@ namespace TransponderReceiverApplication
 
         }
 
-        private void ReceiveData(object sender, RawTransformerDataEventArgs e)
+        public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
             //Console.WriteLine("Filter");
-            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.FlyList)));
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.TransFlyList)));
         }
 
         public List<Fly> FilterData(List<Fly> data)
