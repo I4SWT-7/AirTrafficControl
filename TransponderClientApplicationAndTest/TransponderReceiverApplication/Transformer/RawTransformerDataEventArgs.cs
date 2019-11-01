@@ -8,11 +8,11 @@ namespace TransponderReceiverApplication
 {
     public class RawTransformerDataEventArgs : EventArgs
     {
-        public List<Fly> FlyList { get; set; }
+        public List<Fly> TransFlyList { get; set; }
 
         public RawTransformerDataEventArgs(List<Fly> flyList)
         {
-            FlyList = flyList;
+            TransFlyList = flyList;
         }
     }
 }
