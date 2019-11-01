@@ -32,6 +32,7 @@ namespace CalculateCourse.Test.Unit
         }
         [Test]
         public void CalcCourse_North()
+
         {
             //Arrange
             var uut = new TransponderReceiverApplication.CalculateCourse();

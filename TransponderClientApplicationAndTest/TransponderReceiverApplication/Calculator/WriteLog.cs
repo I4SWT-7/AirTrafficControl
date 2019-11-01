@@ -21,7 +21,7 @@ namespace TransponderReceiverApplication
                 string[] lines = { $"WARNING, RISK OF COLLISION BETWEEN: {prevfly.Tag} AND {newfly.Tag} RESGIERED AT : {prevfly.date.ToString()} {newfly.date.ToString()} " +
                         $"DEBUG: Prefly x,y,z{prevfly.xcor} {prevfly.ycor} {prevfly.zcor} Newfly x,y,z {newfly.xcor} {newfly.ycor} {newfly.zcor}" };
                 using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(@"AirTrafficLogfile.txt"))
+                    new System.IO.StreamWriter(@"AirTrafficLogfile.txt", true))
                 {
                     foreach (string line in lines)
                     {
