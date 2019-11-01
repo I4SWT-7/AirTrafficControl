@@ -22,6 +22,7 @@ namespace CalculateCourse.Test.Unit
             // Act & Assert
             Assert.That(uut.CalcCourse(Fly1, Fly2), Is.EqualTo(45));
         }
+        [Test]
         public void CalcCourse_180degrees()
         {
             //Arrange
