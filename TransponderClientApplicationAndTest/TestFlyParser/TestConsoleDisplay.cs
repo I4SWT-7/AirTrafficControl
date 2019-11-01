@@ -23,7 +23,7 @@ namespace TestFlyParser
         public void ConsoleDisplay_writes_correct_plane()
         {
             _uut = new ConsoleDisplay();
-            string teststring =  "Displaying plane with tag:TAG321, x position 9000meters, y position 9000 meters, altitude: 1000, velocity: 9000 course: 90 degrees ";
+            string teststring =  "Displaying plane with tag:TAG321, x position 9000 meters, y position 9000 meters, altitude: 1000 meters, velocity: 9000 m/s course: 90 degrees ";
 
             Assert.That(_uut.PrintPlane(testfly, testspeed, testcourse), Is.EqualTo (teststring));
         }
