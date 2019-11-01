@@ -13,8 +13,6 @@ namespace TransponderReceiverApplication
             List<string> taglist = new List<string>();
             string dir = System.IO.Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location);
-            //Lines er hvor vi skal gemme det data der skal logges
-            Console.WriteLine("Logcalled");
                 // If the two tags does not exists in the taglist = We may print a warning and save the tags in the taglist
             if (!(taglist.Contains(prevfly.Tag) && taglist.Contains(newfly.Tag)))
             {

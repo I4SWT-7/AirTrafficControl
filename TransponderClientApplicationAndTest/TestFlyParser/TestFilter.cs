@@ -54,12 +54,8 @@ namespace TestFilter.Test.Unit
         [Test]
         public void Event_Received_From_Transformer()
         {
-            _testFlyList.Add(_nameProblemFly1);
-            _testFlyList.Add(_nameProblemFly2);
             _testFlyList.Add(_noProblemFly1);
             _testFlyList.Add(_noProblemFly2);
-            _testFlyList.Add(_xCoorHighProblemFly);
-            _testFlyList.Add(_xCoorLowProblemFly);
             
             // Raise event in fake
             _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
@@ -68,7 +64,7 @@ namespace TestFilter.Test.Unit
 
             // This asserts that uut has connected to the event
             // And handles value correctly
-            Assert.That(_uut.FilterFlyList.Count == 3);
+            Assert.That(_uut.FilterFlyList.Count == 2);
         }
 
         [Test]

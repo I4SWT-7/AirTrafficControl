@@ -12,6 +12,7 @@ namespace TransponderReceiverApplication
     public class FlyTransformer : ITransformer
     {
         public List<Fly> TransFlyList = new List<Fly>();
+        public List<Fly> SavedFlyTest = new List<Fly>();
         private IParser receiver;
         public event EventHandler<RawTransformerDataEventArgs> TransformerDataReady;
         public FlyTransformer(IParser receiver)
@@ -36,26 +37,14 @@ namespace TransponderReceiverApplication
             TransFlyList.Clear();
             for (int i = 0; i < e.Flylist.Count; i++)
             {
-                TransformData(e.Flylist[i]);
-                TransFlyList.Add(e.Flylist[i]);
-                
+                TransFlyList.Add(TransformData(e.Flylist[i]));
             }
 
-            foreach (var fly in e.Flylist)
-            {
-                Console.WriteLine(fly.Tag);
-                Console.WriteLine(fly.xcor);
-                Console.WriteLine(fly.ycor);
-                Console.WriteLine(fly.zcor);
-                Console.WriteLine(fly.date.ToString());
-
-
-
-
-            }
-            TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
+            TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(TransFlyList));
         }
 
     }
 }
+
+
 
