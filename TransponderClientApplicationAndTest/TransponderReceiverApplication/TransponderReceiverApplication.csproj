@@ -57,6 +57,7 @@
     <Compile Include="Calculator\CalculateSpeed.cs" />
     <Compile Include="Calculator\SeperationCondition.cs" />
     <Compile Include="Calculator\WriteLog.cs" />
+    <Compile Include="ConsoleDisplay.cs" />
     <Compile Include="Filter\Filter.cs" />
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="Filter\RawFilterDataEventArgs.cs" />

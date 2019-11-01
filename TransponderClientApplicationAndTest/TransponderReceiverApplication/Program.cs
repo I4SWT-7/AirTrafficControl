@@ -13,8 +13,6 @@ namespace TransponderReceiverApplication
     {
         static void Main(string[] args)
         {
-            CheckForSepCond sepcond = new CheckForSepCond();
-            WriteLog testlog = new WriteLog();
             //Using the real transponder data receiver
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             FlyParser myparser = new FlyParser(receiver);

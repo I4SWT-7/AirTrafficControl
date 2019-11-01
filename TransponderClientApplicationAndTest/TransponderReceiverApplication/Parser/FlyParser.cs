@@ -26,6 +26,7 @@ namespace TransponderReceiverApplication
 
         public List<Fly> Parsedata(List<string> data)
         {
+            FlyList.Clear();
             foreach (var list in data)
             {
                 Fly newplane = new Fly();

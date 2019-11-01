@@ -12,12 +12,15 @@ namespace TransponderReceiverApplication
 {
     public class CollisionHandler : ICollisionHandler
     {
-        private List<Fly> PreviousData;
+        private List<Fly> PreviousData = new List<Fly>();
         private IFilter Receiver;
+        private ConsoleDisplay display = new ConsoleDisplay();
         private CalculateCourse coursecalculator = new CalculateCourse();
         private CalculateSpeed speedcalculator = new CalculateSpeed();
         private CalculateDistance distancecalculator = new CalculateDistance();
         private CheckForSepCond SeperationCalculator = new CheckForSepCond();
+        private double speed = 0;
+        private double course = 0;
 
         public CollisionHandler(IFilter receiver)
         {
@@ -39,16 +42,19 @@ namespace TransponderReceiverApplication
                     {
                         if(prevfly.Tag == newplane.Tag)
                         {
-                            coursecalculator.CalcCourse(prevfly, newplane);
-                            speedcalculator.CalcSpeed(prevfly, newplane);
+                            course = coursecalculator.CalcCourse(prevfly, newplane);
+                            speed = speedcalculator.CalcSpeed(prevfly, newplane);
+                            display.PrintPlane(prevfly, speed, course);
                         }
                         distancecalculator.CalcDistance(prevfly, newplane);
                         SeperationCalculator.SepCond(prevfly, newplane);
+                        Console.WriteLine("Distance:");
+                        Console.WriteLine(distancecalculator.CalcDistance(prevfly, newplane));
 
                     }
                 }
 
-                PreviousData = null;
+                PreviousData.Clear();
                 PreviousData = flylist;
             }
         }

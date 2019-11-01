@@ -24,7 +24,6 @@ namespace TransponderReceiverApplication
                 biggestzvalue = Newfly.zcor;
                 smallestzvalue = prevfly.zcor;
             }
-            Console.WriteLine($"{biggestzvalue} {smallestzvalue}");
             if (prevfly.Tag != Newfly.Tag && (biggestzvalue - smallestzvalue) < 300)
             {
                 if (prevfly.Tag != Newfly.Tag && calcdistance.CalcDistance(Newfly, prevfly) < 5000)
