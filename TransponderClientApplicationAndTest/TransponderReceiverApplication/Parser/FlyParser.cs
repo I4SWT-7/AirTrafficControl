@@ -43,8 +43,7 @@ namespace TransponderReceiverApplication
             //    Console.WriteLine($"{fly.Tag} {fly.date}+ {fly.date.Millisecond}");
             //}
            // Console.WriteLine("Paraser");
-
-            return FlyList;
+           return FlyList;
         }
 
         private void RecieveData(object sender, RawTransponderDataEventArgs e)
