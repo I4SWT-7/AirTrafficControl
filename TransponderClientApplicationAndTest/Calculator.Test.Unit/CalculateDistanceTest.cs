@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using TransponderReceiverApplication.Calculator;
+using TransponderReceiverApplication;
 
 
 
@@ -13,14 +13,32 @@ namespace Calculator.Test.Unit
     [TestFixture]
     public class CalculateDistanceTest
     {
-        [TestCase(50, 40, 60, 80, 22.361)]
-        public void CalcDistance_xcor1_ycor1_xcor2_ycor2_ReturnResult(int a, int b, int c, int d, int e)
+
+        //Fly Fly1 = new Fly("TAG123", 40, 60, 500);
+        //Fly Fly2 = new Fly("TAG321", 60, 80, 1000);
+
+        [Test]
+        public void CalcDistance_ShortDistance_ReturnResult()
         {
+            Fly Fly1 = new Fly("TAG123", 40, 60, 500);
+            Fly Fly2 = new Fly("TAG321", 60, 80, 1000);
             // Arrange
             var uut = new CalculateDistance();
 
             // Act & Assert
-            Assert.That(uut.CalcDistance(a, b, c, d), Is.EqualTo(e));
+            Assert.That(uut.CalcDistance(Fly1, Fly2), Is.EqualTo(28.2843));
+        }
+
+        [Test]
+        public void CalcDistance_LongDistance_ReturnResult()
+        {
+            Fly Fly1 = new Fly("TAG123", 40, 60, 500);
+            Fly Fly2 = new Fly("TAG321", 9000, 9000, 1000);
+            //Arrange
+            var uut = new CalculateDistance();
+
+            //Act & Assert
+            Assert.That(uut.CalcDistance(Fly1, Fly2), Is.EqualTo(12657.2193));
         }
     }
 }
