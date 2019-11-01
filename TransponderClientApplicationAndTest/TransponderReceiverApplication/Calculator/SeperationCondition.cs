@@ -9,6 +9,7 @@ namespace TransponderReceiverApplication
     public class CheckForSepCond
     {
         private CalculateDistance calcdistance = new CalculateDistance();
+        private ConsoleDisplay display = new ConsoleDisplay();
         private WriteLog logger = new WriteLog();
         public bool SepCond(Fly prevfly, Fly Newfly)
         {
@@ -29,6 +30,7 @@ namespace TransponderReceiverApplication
                 if (prevfly.Tag != Newfly.Tag && calcdistance.CalcDistance(Newfly, prevfly) < 5000)
                 {
                     logger.WriteLogWarning(prevfly, Newfly);
+                    display.PrintSeperationWarning(prevfly, Newfly);
                     return true;
                 }
             }

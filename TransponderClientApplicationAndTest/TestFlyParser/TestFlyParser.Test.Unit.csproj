@@ -67,6 +67,7 @@
     <Compile Include="CalculateSpeedTest.cs" />
     <Compile Include="SeperationConditionTest.cs" />
     <Compile Include="TestCollisionHandler.cs" />
+    <Compile Include="TestConsoleDisplay.cs" />
     <Compile Include="TestFilter.cs" />
     <Compile Include="TestFlyParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

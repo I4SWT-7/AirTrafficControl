@@ -51,8 +51,6 @@ namespace TransponderReceiverApplication
                         }
                         distancecalculator.CalcDistance(prevfly, newplane);
                         SeperationCalculator.SepCond(prevfly, newplane);
-                       // Console.WriteLine("Distance:");
-                       // Console.WriteLine(distancecalculator.CalcDistance(prevfly, newplane));
 
                     }
                 }
