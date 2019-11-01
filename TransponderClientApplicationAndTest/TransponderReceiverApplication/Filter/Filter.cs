@@ -21,14 +21,16 @@ namespace TransponderReceiverApplication
 
         }
 
-        private void ReceiveData(object sender, RawTransformerDataEventArgs e)
+        public void ReceiveData(object sender, RawTransformerDataEventArgs e)
         {
             //Console.WriteLine("Filter");
-            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterData(e.TransFlyList)));
+            FilterData(e.TransFlyList);
+            FilterDataReady?.Invoke(this, new RawFilterDataEventArgs(FilterFlyList));
         }
 
         public List<Fly> FilterData(List<Fly> data)
         {
+            FilterFlyList.Clear();
             int count = data.Count;
             for (int i = 0; i < count; i++)
             {
@@ -50,9 +52,12 @@ namespace TransponderReceiverApplication
                     count--;
                     i--;
                 }
+                else
+                {
+                    FilterFlyList.Add(data[i]);
+                }
                
             }
-            FilterFlyList = data;
             return data;
         }
     }

@@ -41,7 +41,7 @@ namespace TestFilter.Test.Unit
             _fakeCollisionHandler = Substitute.For<ICollisionHandler>();
             _uut = new Filter(_fakeTransformer);
 
-        _testFlyList = new List<Fly>() 
+            _testFlyList = new List<Fly>() 
             {
                 //_noProblemFly1, _noProblemFly2, _noProblemFly3, _noProblemFly4, 
                 //_nameProblemFly1, _nameProblemFly2, _xCoorHighProblemFly,
@@ -51,19 +51,22 @@ namespace TestFilter.Test.Unit
             _numberOfEvents = 0;
         }
 
-        //[Test]
-        //public void Event_Received_From_Transformer()
-        //{
-        //    _testFlyList.Add(_noProblemFly1);
-        //    // Raise event in fake
-        //    _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
-        //        this,
-        //        new RawTransformerDataEventArgs(_testFlyList));
+        [Test]
+        public void Event_Received_From_Transformer()
+        {
+            _testFlyList.Add(_noProblemFly1);
+            _testFlyList.Add(_noProblemFly2);
+            //_uut.FilterData(_testFlyList);
+            // Raise event in fake
+            _fakeTransformer.TransformerDataReady += Raise.EventWith<RawTransformerDataEventArgs>(
+                this,
+                new RawTransformerDataEventArgs(_testFlyList) {  });
 
-        //    // This asserts that uut has connected to the event
-        //    // And handles value correctly
-        //    Assert.That(_uut.FilterFlyList.Count == 1);
-        //}
+            // This asserts that uut has connected to the event
+            // And handles value correctly
+            //Assert.That(_uut.FilterFlyList[0] == _noProblemFly1);
+            Assert.That(_uut.FilterFlyList.Count == 2);
+        }
 
 
         [Test]
