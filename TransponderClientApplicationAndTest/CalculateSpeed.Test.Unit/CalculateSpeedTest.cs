@@ -35,19 +35,8 @@ namespace CalculateSpeed.Test.Unit
             var uut = new TransponderReceiverApplication.CalculateSpeed();
 
             // Act & Assert
-            Assert.That(uut.CalcSpeed(Fly1,Fly2), Is.EqualTo(0));
+            Assert.That(uut.CalcSpeed(Fly1NotMoving,Fly2NotMoving), Is.EqualTo(0));
         }
-        //[Test]
-        //public void CalcSpeed_distance_timeStamps_NegativeValues_ReturnResult()
-        //{
-        //    this.Fly1NotMoving.date = DateTime.ParseExact("20191006233456789", "yyyyMMddHHmmssfff", null);
-        //    this.Fly2NotMoing.date = DateTime.ParseExact("20191006213456789", "yyyyMMddHHmmssfff", null);
-        //    //Arrange
-        //    var uut = new TransponderReceiverApplication.CalculateSpeed();
-
-        //    // Act & Assert
-        //    Assert.That(uut.CalcSpeed(Fly1, Fly2), Is.EqualTo(0));
-        //}
     }
 
 }
