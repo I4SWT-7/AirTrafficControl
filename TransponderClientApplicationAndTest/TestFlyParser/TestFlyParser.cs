@@ -17,7 +17,7 @@ namespace TestFlyParser
         List<Fly> assertfly = new List<Fly>();
         List<string> testData = new List<string>();
         public event EventHandler<RawTransponderDataEventArgs> TransponderDataTestReady;
-
+        private RawParserDataEventArgs _testRawParserDataEventArgs;
 
         [SetUp]
         public void Setup()
@@ -40,6 +40,13 @@ namespace TestFlyParser
             assertfly.Add(fly1);
             assertfly.Add(fly2);
             assertfly.Add(fly3);
+
+            // Setting _testRawParserDataEventArgs to null
+            _testRawParserDataEventArgs = null;
+
+            // Setting up event listener to check event
+            uut.ParserDataReady += (o, args) => { _testRawParserDataEventArgs = args; };
+
         }
 
         //[Test]
@@ -132,5 +139,19 @@ namespace TestFlyParser
                 }
             }
         }
+        [Test]
+        public void Parser_event_fired()
+        {
+            uut.RecieveData(this, new RawTransponderDataEventArgs(testData));
+            Assert.That(_testRawParserDataEventArgs, Is.Not.Null);
+        }
+
+        [Test]
+        public void Parser_event_fired_with_correct_list()
+        {
+            uut.RecieveData(this, new RawTransponderDataEventArgs(testData));
+            Assert.That(_testRawParserDataEventArgs.Flylist.Count, Is.EqualTo(testData.Count));
+        }
+
     }
 }

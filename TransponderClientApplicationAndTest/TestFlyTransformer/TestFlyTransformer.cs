@@ -30,7 +30,7 @@ namespace TestFlyTransformer
         [SetUp]
         public void SetUp()
         {
-            _testTransformerDataEventArgs = null;
+            
 
             // Make a test Flylist
             _testFlyList = new List<Fly>();
@@ -39,6 +39,11 @@ namespace TestFlyTransformer
             // Injection
             _uut = new FlyTransformer(_fakeIParser);
 
+
+            // Setting _testTransformerDataEventArgs to null
+            _testTransformerDataEventArgs = null;
+
+            // Setting up event listener to check event
             _uut.TransformerDataReady += (o, args) => { _testTransformerDataEventArgs = args; };
 
         }
@@ -63,6 +68,10 @@ namespace TestFlyTransformer
             
             _testFlyList.Add(testfly1);
             _testFlyList.Add(testfly2);
+
+            _fakeIParser.ParserDataReady +=
+                Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_testFlyList));
+            
 
             _fakeIParser.ParserDataReady +=
                 Raise.EventWith<RawParserDataEventArgs>(this, new RawParserDataEventArgs(_testFlyList));
