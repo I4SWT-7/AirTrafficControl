@@ -40,6 +40,19 @@ namespace TransponderReceiverApplication
                 TransFlyList.Add(e.Flylist[i]);
                 
             }
+
+            foreach (var fly in e.Flylist)
+            {
+                Console.WriteLine(fly.Tag);
+                Console.WriteLine(fly.xcor);
+                Console.WriteLine(fly.ycor);
+                Console.WriteLine(fly.zcor);
+                Console.WriteLine(fly.date.ToString());
+
+
+
+
+            }
             TransformerDataReady?.Invoke(this, new RawTransformerDataEventArgs(e.Flylist));
         }
 

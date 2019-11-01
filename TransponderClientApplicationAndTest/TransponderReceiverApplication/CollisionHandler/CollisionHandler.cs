@@ -13,7 +13,7 @@ namespace TransponderReceiverApplication
     public class CollisionHandler : ICollisionHandler
     {
         private List<Fly> PreviousData = new List<Fly>();
-        private ITransformer Receiver; // -- change
+        private IFilter Receiver;
         private ConsoleDisplay display = new ConsoleDisplay();
         private CalculateCourse coursecalculator = new CalculateCourse();
         private CalculateSpeed speedcalculator = new CalculateSpeed();
@@ -22,10 +22,10 @@ namespace TransponderReceiverApplication
         private double speed = 0;
         private double course = 0;
 
-        public CollisionHandler(ITransformer receiver) //change
+        public CollisionHandler(IFilter receiver)
         {
             this.Receiver = receiver;
-            this.Receiver.TransformerDataReady += ReceiveData;
+            this.Receiver.FilterDataReady += ReceiveData;
         }
         public void DataRecived(List<Fly> flylist)
         {
@@ -59,14 +59,14 @@ namespace TransponderReceiverApplication
             }
         }
 
-        public void ReceiveData(object sender, RawTransformerDataEventArgs e) // --change
+        public void ReceiveData(object sender, RawFilterDataEventArgs e)
         {
             //Console.WriteLine("CollisionHandler");
-            foreach (var data in e.TransFlyList)
+            foreach (var data in e.FlyList)
             {
                 //Console.WriteLine($"{data.Tag} {data.xcor} {data.ycor} {data.zcor} {data.date}");
             }
-            DataRecived(e.TransFlyList); // --cahnge
+            DataRecived(e.FlyList);
         }
     }
 }
