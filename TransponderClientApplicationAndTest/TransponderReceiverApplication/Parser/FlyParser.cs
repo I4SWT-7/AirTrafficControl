@@ -10,6 +10,7 @@ namespace TransponderReceiverApplication
 {
     public class FlyParser : IParser
     {
+            
         public List<Fly> FlyList = new List<Fly>();
         private ITransponderReceiver receiver;
         public event EventHandler<RawParserDataEventArgs> ParserDataReady;
@@ -44,7 +45,7 @@ namespace TransponderReceiverApplication
             return FlyList;
         }
 
-        private void RecieveData(object sender, RawTransponderDataEventArgs e)
+        public void RecieveData(object sender, RawTransponderDataEventArgs e)
         {
 
             List<string> stringlist = new List<string>();
