@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransponderReceiverApplication
 {
+
     class CalculateCourse
     {
         private double course;
@@ -23,7 +24,8 @@ namespace TransponderReceiverApplication
                 (Math.Sin(previous.xcor) * Math.Cos(newplane.xcor) * Math.Cos(delta_y));
             course = Math.Atan2(x, y);
             // Convert from radians to degrees and return
-            return course * (180.0 / Math.PI);
+            return course * (180.0 / Math.PI); 
+
         }
     }
 }

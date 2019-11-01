@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransponderReceiverApplication
 {
-    class CalculateSpeed
+    public class CalculateSpeed
     {
         private double distance;
         private double speed;
@@ -18,7 +18,9 @@ namespace TransponderReceiverApplication
             timeStamps = (prevfly.date - newfly.date);
             distance = distancecalc.CalcDistance(prevfly, newfly);
             speed = distance / timeStamps.TotalSeconds;
-            return speed;
+            Console.WriteLine(timeStamps);
+            Console.WriteLine(timeStamps.TotalSeconds);
+            return Math.Round(speed, 2);
         }
     }
 }

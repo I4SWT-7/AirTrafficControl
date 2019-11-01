@@ -12,7 +12,8 @@ namespace TransponderReceiverApplication
         {
             //We need the x and y coordinates for two planes to calculate the distance
             double distance = Math.Sqrt(Math.Pow(prevfly.xcor - newfly.xcor, 2) + Math.Pow(prevfly.ycor - newfly.ycor, 2));
-            return distance;
+
+            return Math.Round(distance, 4);
         }
     }
 }
